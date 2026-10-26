@@ -4,7 +4,9 @@ type Props = {
   className?: string;
   /** Whips the rod for a catch, on top of the idle sway. Rotates about his hands. */
   rod?: Ref<SVGGElement>;
-  /** The line and lure, faded out while a catch is in the air. */
+  /** The rod tip, where a line to a hooked fish starts. */
+  tip?: Ref<SVGCircleElement>;
+  /** The line and lure, hidden while a catch is on its own line. */
   line?: Ref<SVGGElement>;
   /** The lure, twitched on each click. */
   lure?: Ref<SVGGElement>;
@@ -13,7 +15,7 @@ type Props = {
 
 // A small old fisherman in pen and ink, sat on the edge of whatever holds him, fishing off it. The seat line is y=150 in
 // the viewBox, so the parent lines that up with its top edge. A displacement filter wobbles every stroke like a nib.
-export function Fisherman({ className = '', rod, line, lure, onLure }: Props) {
+export function Fisherman({ className = '', rod, tip, line, lure, onLure }: Props) {
   return (
     <svg viewBox="0 0 200 260" aria-hidden="true" className={`overflow-visible ${className}`}>
       <defs>
@@ -28,6 +30,7 @@ export function Fisherman({ className = '', rod, line, lure, onLure }: Props) {
           <g className="animate-sway [transform-box:view-box]" style={{ transformOrigin: '112px 124px' }}>
             <path d="M146 140 112 124Q66 92 20 40" className="fill-none" strokeWidth="2.2" />
             <path d="M146 140 136 135" className="fill-none" strokeWidth="4" />
+            <circle ref={tip} cx="20" cy="40" r="0.5" className="fill-none stroke-none" />
             <g ref={line}>
               <path d="M20 40 21 196" className="fill-none" strokeWidth="0.8" />
               <g ref={lure} onClick={onLure} className={onLure ? 'pointer-events-auto cursor-pointer' : ''}>

@@ -6,7 +6,8 @@ const SETTLE = 'cubic-bezier(0.45, 0, 0.55, 1)';
 const CLICKS_TO_CATCH = 3;
 const MAX_IN_BOAT = 3;
 // In the boat box (200 by 160): from the lure in the water, up over his head, down into the boat.
-const FLIGHT = "path('M-35 125Q20-70 112 92')";
+const FLIGHT = "path('M-35 125Q-10-250 112 92')";
+const CATCH_MS = 1900;
 
 // One 240px wave tile; the strip is 240px wider than the screen and drifts one tile, so the loop is seamless.
 const wave = (crest: number, fill: number, line: number) =>
@@ -17,8 +18,12 @@ const wave = (crest: number, fill: number, line: number) =>
 // A greyscale sea surface pinned above the bottom of the screen. It is sticky, so once the footer scrolls up it rides on
 // the footer's top edge and the footer sits underwater. The old boy fishes off the side of his rowboat on it.
 export function Sea() {
+  const sea = useRef<HTMLDivElement>(null);
   const rod = useRef<SVGGElement>(null);
+  const tip = useRef<SVGCircleElement>(null);
   const line = useRef<SVGGElement>(null);
+  const taut = useRef<SVGLineElement>(null);
+  const nose = useRef<HTMLSpanElement>(null);
   const lure = useRef<SVGGElement>(null);
   const fish = useRef<HTMLDivElement>(null);
   const clicks = useRef(0);
@@ -43,23 +48,40 @@ export function Sea() {
     busy.current = true;
     const land = () => setCaught((n) => n + 1);
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return land();
-    console.assert(!!(rod.current && line.current && fish.current), 'Sea: catch refs missing');
+    console.assert(!!(sea.current && rod.current && tip.current && line.current && taut.current && nose.current && fish.current), 'Sea: catch refs missing');
     rod.current!.animate(
       [{ transform: 'rotate(0deg)', easing: EASE }, { transform: 'rotate(40deg)', offset: 0.2, easing: SETTLE }, { transform: 'rotate(0deg)' }],
-      { duration: 1800 },
-    );
-    line.current!.animate([{ opacity: 1 }, { opacity: 0, offset: 0.08 }, { opacity: 0, offset: 0.7 }, { opacity: 1 }], { duration: 1800 });
-    fish.current!.animate(
-      [
-        { opacity: 1, offsetDistance: '0%' },
-        { opacity: 1, offsetDistance: '100%' },
-      ],
-      { duration: 900, delay: 120, easing: 'cubic-bezier(0.3, 0.1, 0.35, 1)', fill: 'forwards' },
+      { duration: CATCH_MS },
     ).onfinish = land;
+    // The idle line and lure hand over to a taut line from the rod tip to the fish's mouth, and back once it is landed.
+    line.current!.animate([{ opacity: 1 }, { opacity: 0, offset: 0.03 }, { opacity: 0, offset: 0.72 }, { opacity: 1 }], { duration: CATCH_MS });
+    taut.current!.animate([{ opacity: 0 }, { opacity: 1, offset: 0.03 }, { opacity: 1, offset: 0.68 }, { opacity: 0, offset: 0.9 }], { duration: CATCH_MS });
+    fish.current!.animate([{ opacity: 1, offsetDistance: '0%' }, { opacity: 1, offsetDistance: '100%' }], {
+      duration: 1150,
+      delay: 60,
+      easing: 'cubic-bezier(0.25, 0.1, 0.3, 1)',
+      fill: 'forwards',
+    });
+    const draw = () => {
+      if (!busy.current) return;
+      const at = (el: Element) => {
+        const r = el.getBoundingClientRect();
+        return [r.x + r.width / 2 - box.x, r.y + r.height / 2 - box.y];
+      };
+      const box = sea.current!.getBoundingClientRect();
+      const [x1, y1] = at(tip.current!);
+      const [x2, y2] = at(nose.current!);
+      taut.current!.setAttribute('x1', `${x1}`);
+      taut.current!.setAttribute('y1', `${y1}`);
+      taut.current!.setAttribute('x2', `${x2}`);
+      taut.current!.setAttribute('y2', `${y2}`);
+      requestAnimationFrame(draw);
+    };
+    draw();
   }
 
   return (
-    <div aria-hidden="true" className="pointer-events-none sticky bottom-0 z-40 -mt-40 h-40 overflow-x-clip">
+    <div ref={sea} aria-hidden="true" className="pointer-events-none sticky bottom-0 z-40 -mt-40 h-40 overflow-x-clip">
       <div className="absolute bottom-2 left-0 h-16 w-[calc(100%+240px)] animate-wave-back" style={{ backgroundImage: wave(18, 0.05, 0.22) }} />
 
       <div className="absolute right-2 bottom-0 h-full w-[200px] origin-bottom-right scale-75 md:right-[6%] md:scale-100">
@@ -79,14 +101,18 @@ export function Sea() {
             EST. 2018
           </text>
         </svg>
-        <Fisherman className="absolute bottom-1 -left-12 w-[120px]" rod={rod} line={line} lure={lure} onLure={onLure} />
+        <Fisherman className="absolute bottom-1 -left-12 w-[120px]" rod={rod} tip={tip} line={line} lure={lure} onLure={onLure} />
           <div ref={fish} className="absolute top-0 left-0 opacity-0 [offset-rotate:auto]" style={{ offsetPath: FLIGHT }}>
-            <Fish className="w-8" />
+            <Fish className="block w-8" />
+            <span ref={nose} className="absolute top-1/2 right-0 size-px" />
           </div>
         </div>
       </div>
 
       <div className="absolute bottom-0 left-0 h-16 w-[calc(100%+240px)] animate-wave" style={{ backgroundImage: wave(22, 0.2, 0.55) }} />
+      <svg className="absolute inset-0 size-full overflow-visible">
+        <line ref={taut} className="stroke-fc-ink opacity-0" strokeWidth="0.8" strokeLinecap="round" />
+      </svg>
     </div>
   );
 }
