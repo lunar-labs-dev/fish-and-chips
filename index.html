@@ -3,7 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>document.documentElement.classList.add('js')</script>
+    <script>
+      var d = document.documentElement;
+      d.classList.add('js');
+      // The fish splash plays once per visit, never for reduced motion.
+      try {
+        if (!sessionStorage.getItem('fc-splash') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('splash');
+          sessionStorage.setItem('fc-splash', '1');
+        }
+      } catch (e) {}
+    </script>
     <title>The Fish &amp; Chip Shop | Proper fish and chips in Johannesburg</title>
     <meta name="description" content="Family run fish and chips battered with love since 2018. Find our stores in Victoria Yards, Greenvalley and Parkrand, and see the menu." />
     <link rel="canonical" href="https://www.thefishandchipshop.co.za/" />
@@ -20,6 +30,45 @@
     <link rel="preload" as="image" href="%BASE_URL%images/hero-hake-1100.webp" imagesrcset="%BASE_URL%images/hero-hake-640.webp 640w, %BASE_URL%images/hero-hake-1100.webp 1100w" imagesizes="(min-width: 1024px) 50vw, 100vw" fetchpriority="high" />
   </head>
   <body>
+    <!-- Splash: CSS only so it paints before any script; shown once per visit by the head script, click to skip. -->
+    <div
+      id="splash"
+      aria-hidden="true"
+      onclick="this.remove()"
+      onanimationend="event.target === this && this.remove()"
+      class="fixed inset-0 z-[100] hidden cursor-pointer flex-col items-center justify-center gap-4 bg-fc-white md:gap-14 animate-splash-out [.splash_&]:flex"
+    >
+      <div class="relative h-60 w-90 overflow-hidden max-sm:scale-90 md:scale-125">
+        <svg class="absolute bottom-0 left-0 h-16 w-[720px] animate-wave-back fill-fc-ink/15" viewBox="0 0 720 64"><path d="M0 14 q22.5 -9 45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 V64 H0Z" /></svg>
+          <svg class="absolute top-0 left-0 w-20 animate-fish-jump [offset-path:path('M40_292_Q180_-170_320_292')]" viewBox="0 0 80 52">
+            <path d="M20 26 3 11c-3 10-3 20 0 30Z" class="fill-fc-lemon stroke-fc-ink" stroke-width="3" stroke-linejoin="round" />
+            <path d="M33 12c5-10 17-11 22-1" class="fill-fc-red stroke-fc-ink" stroke-width="3" stroke-linejoin="round" />
+            <ellipse cx="45" cy="27" rx="28" ry="18" class="fill-fc-lemon stroke-fc-ink" stroke-width="3" />
+            <path d="M31 21c5 4 5 8 0 12" class="fill-none stroke-fc-ink" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="56" cy="32" r="3" class="fill-fc-red/60" />
+            <circle cx="59" cy="21" r="6.5" class="fill-fc-white stroke-fc-ink" stroke-width="2.5" />
+            <circle cx="60.5" cy="21.5" r="3.4" class="fill-fc-ink" />
+            <circle cx="61.8" cy="19.8" r="1.2" class="fill-fc-white" />
+            <path d="M63 32c2.5 2.5 5.5 2.5 7.5-.5" class="fill-none stroke-fc-ink" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:-26px] [--dy:-48px] [animation-delay:0.38s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:-12px] [--dy:-70px] [animation-delay:0.395s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-4 animate-drop fill-fc-ink [--dx:2px] [--dy:-80px] [animation-delay:0.41s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:14px] [--dy:-62px] [animation-delay:0.425s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:28px] [--dy:-42px] [animation-delay:0.44s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:-4px] [--dy:-38px] [animation-delay:0.455s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:20px] [--dy:-28px] [animation-delay:0.47s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:-26px] [--dy:-48px] [animation-delay:0.94s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:-12px] [--dy:-70px] [animation-delay:0.955s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-4 animate-drop fill-fc-ink [--dx:2px] [--dy:-80px] [animation-delay:0.97s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:14px] [--dy:-62px] [animation-delay:0.985s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:28px] [--dy:-42px] [animation-delay:1.0s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:-4px] [--dy:-38px] [animation-delay:1.015s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:20px] [--dy:-28px] [animation-delay:1.03s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
+        <svg class="absolute bottom-0 left-0 h-12 w-[720px] animate-wave fill-fc-ink" viewBox="0 0 720 48"><path d="M0 8 q22.5 -9 45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 V48 H0Z" /></svg>
+      </div>
+      <img src="%BASE_URL%images/logo-360.webp" alt="" width="360" height="243" class="w-32 animate-logo-in" />
+    </div>
     <div id="root" data-page="home"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

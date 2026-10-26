@@ -22,6 +22,56 @@
   --font-fc-serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
 
   --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Home page splash: a fish leaps out of the waves, splashes back in, then the overlay fades. */
+  --animate-fish-jump: fish-jump 1s cubic-bezier(0.3, 0, 0.7, 1) 0.2s both;
+  --animate-wave: wave 2.4s linear infinite;
+  --animate-wave-back: wave 3.4s linear infinite reverse;
+  --animate-drop: drop 0.75s cubic-bezier(0.2, 0.7, 0.4, 1) both;
+  --animate-logo-in: logo-in 0.6s var(--ease-fc-out) 1s both;
+  --animate-splash-out: splash-out 0.45s ease-in 1.85s forwards;
+
+  @keyframes fish-jump {
+    from {
+      offset-distance: 0%;
+    }
+    to {
+      offset-distance: 100%;
+    }
+  }
+  @keyframes wave {
+    to {
+      transform: translateX(-360px);
+    }
+  }
+  @keyframes drop {
+    0% {
+      transform: translate(0, 0) scale(0.4);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    55% {
+      transform: translate(calc(var(--dx) * 0.7), var(--dy)) scale(1);
+    }
+    100% {
+      transform: translate(var(--dx), 14px) scale(0.6);
+      opacity: 0;
+    }
+  }
+  @keyframes logo-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  @keyframes splash-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 html {

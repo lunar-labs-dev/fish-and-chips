@@ -1,9 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Lenis from 'lenis';
-import { ScrollTrigger } from './lib/gsap';
+import { gsap, ScrollTrigger } from './lib/gsap';
+import { splashDone } from './lib/splash';
 import { Page, type PageId } from './pages';
 import './styles/global.css';
+
+// Hold the hero's GSAP intro (SplitText) until the fish splash starts fading, so it plays where it can be seen.
+gsap.globalTimeline.pause();
+splashDone.then(() => gsap.globalTimeline.resume());
 
 // Production HTML is prerendered (scripts/prerender.mjs), so hydrate it; dev starts empty.
 const root = document.getElementById('root')!;

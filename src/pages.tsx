@@ -3,6 +3,7 @@ import { LazyMotion, MotionConfig } from 'motion/react';
 
 const loadMotionFeatures = () => import('./lib/motion-features').then((m) => m.default);
 import { initReveal } from './lib/reveal';
+import { splashDone } from './lib/splash';
 import { requirements } from './data/invest';
 import { Navbar } from './sections/Navbar';
 import { Hero } from './sections/Hero';
@@ -18,7 +19,16 @@ import { Footer } from './sections/Footer';
 export type PageId = 'home' | 'invest';
 
 export function Page({ id }: { id: PageId }) {
-  useEffect(() => initReveal(), []);
+  // Scroll reveals start after the fish splash, so the hero copy fades in where it can be seen.
+  useEffect(() => {
+    let stop: (() => void) | undefined;
+    let live = true;
+    splashDone.then(() => live && (stop = initReveal()));
+    return () => {
+      live = false;
+      stop?.();
+    };
+  }, []);
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadMotionFeatures} strict>
