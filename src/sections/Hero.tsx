@@ -11,7 +11,7 @@ export function Hero() {
     <section id="top" className="bg-tiles relative overflow-hidden pt-28 pb-16 md:pt-36 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-28 lg:pb-20">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-8">
         <div className="relative z-10">
-          <h1 className="m-0 font-ns-victor text-[clamp(3.25rem,13vw,7.5rem)] leading-[0.92] font-bold tracking-[-0.04em] text-fc-ink">
+          <h1 className="m-0 font-fc-logo text-[clamp(3.25rem,13vw,7.5rem)] leading-[0.92] tracking-[-0.01em] text-fc-ink">
             <SplitText tag="span" text="Battered with" splitType="chars" trigger="load" textAlign="left" delay={35} duration={0.9} />{' '}
             <SplitText
               tag="span"
@@ -24,7 +24,7 @@ export function Hero() {
               ease="back.out(2.2)"
               from={{ opacity: 0, y: '0.6em', rotate: -14 }}
               to={{ opacity: 1, y: 0, rotate: 0, delay: 0.55 }}
-              className="pr-[0.08em] pb-[0.06em] font-semibold text-fc-red italic"
+              className="pr-[0.08em] pb-[0.06em] text-fc-red italic"
             />
           </h1>
 

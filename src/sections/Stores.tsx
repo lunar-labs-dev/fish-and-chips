@@ -20,8 +20,8 @@ export function Stores() {
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="reveal flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h2 className="m-0 font-ns-victor text-5xl leading-none font-bold tracking-[-0.04em] md:text-7xl">
-              Find your <span className="font-semibold text-fc-red italic">chippie</span>
+            <h2 className="m-0 font-fc-logo text-5xl leading-none tracking-[-0.01em] md:text-7xl">
+              Find your <span className="text-fc-red italic">chippie</span>
             </h2>
             <p className="mt-6 mb-0 max-w-md text-xl leading-snug text-fc-ink-soft">
               Three shops across Johannesburg and the East Rand, with more on the way.
@@ -73,7 +73,7 @@ export function Stores() {
           </ul>
         ) : (
           <div className="mt-14 rounded-3xl border-2 border-dashed border-fc-ink/30 bg-fc-white p-8 md:p-12">
-            <h3 className="m-0 font-ns-victor text-2xl font-bold">No shop near “{query.trim()}” yet.</h3>
+            <h3 className="m-0 font-fc-logo text-2xl">No shop near “{query.trim()}” yet.</h3>
             <p className="mt-3 mb-6 text-lg text-fc-ink-soft">We are opening soon in {comingSoon.join(', ')}. Clear the search to see every store.</p>
             <button type="button" onClick={() => setQuery('')} className="btn-ink">
               Show all stores
@@ -82,7 +82,7 @@ export function Stores() {
         )}
 
         <div className="mt-16 flex flex-col gap-4 border-t-2 border-fc-ink pt-8 md:flex-row md:items-baseline md:gap-10">
-          <h3 className="m-0 shrink-0 font-ns-victor text-xl font-bold">Coming soon</h3>
+          <h3 className="m-0 shrink-0 font-fc-logo text-xl">Coming soon</h3>
           <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
             {comingSoon.map((c) => (
               <li key={c} className="rounded-full border border-fc-ink/20 bg-fc-white px-4 py-2 text-base">
@@ -99,7 +99,7 @@ export function Stores() {
 function StoreCard({ store }: { store: Store }) {
   return (
     <article className="flex h-full flex-col rounded-3xl bg-fc-white p-7 shadow-[0_1px_0_var(--color-fc-grout),0_24px_48px_-28px_rgb(35_31_32/0.3)] ring-1 ring-fc-grout transition-transform duration-500 ease-fc-out hover:-translate-y-1 md:p-8">
-      <h3 className="m-0 font-ns-victor text-3xl font-bold tracking-tight">{store.name}</h3>
+      <h3 className="m-0 font-fc-logo text-3xl tracking-[-0.01em]">{store.name}</h3>
       <p className="mt-1 mb-0 text-base text-fc-ink-soft italic">{store.area}</p>
 
       <address className="mt-6 text-lg leading-snug not-italic">

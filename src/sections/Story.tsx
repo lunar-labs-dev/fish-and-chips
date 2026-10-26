@@ -16,7 +16,7 @@ export function Story() {
             className="reveal mx-auto block w-full max-w-md lg:max-w-lg"
           />
           <figure className="reveal mx-auto mt-10 mb-0 max-w-md lg:max-w-lg rounded-3xl bg-fc-ink p-8 text-fc-white md:p-10">
-            <blockquote className="m-0 font-ns-victor text-2xl leading-snug font-bold tracking-tight md:text-3xl">
+            <blockquote className="m-0 font-fc-logo text-2xl leading-snug tracking-[-0.01em] md:text-3xl">
               And so The Fish &amp; Chip Shop was born. A restaurant battered with love, sprinkled with passion and{' '}
               <span className="text-fc-lemon italic">wrapped up in fate.</span>
             </blockquote>
@@ -24,14 +24,14 @@ export function Story() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <h2 className="reveal m-0 font-ns-victor text-5xl leading-none font-bold tracking-[-0.04em] md:text-7xl">
-            Wrapped up in <span className="font-semibold text-fc-red italic">fate</span>
+          <h2 className="reveal m-0 font-fc-logo text-5xl leading-none tracking-[-0.01em] md:text-7xl">
+            Wrapped up in <span className="text-fc-red italic">fate</span>
           </h2>
           <div className="mt-10 flex flex-col gap-6 text-xl leading-relaxed text-fc-ink-soft">
             {story.map((p, i) => (
               <p
                 key={i}
-                className={`reveal m-0 ${i === 0 ? 'text-fc-ink first-letter:float-left first-letter:mt-1 first-letter:mr-3 first-letter:font-ns-victor first-letter:text-7xl first-letter:leading-[0.8] first-letter:font-bold first-letter:text-fc-red' : ''}`}
+                className={`reveal m-0 ${i === 0 ? 'text-fc-ink first-letter:float-left first-letter:mt-1 first-letter:mr-3 first-letter:font-fc-logo first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-fc-red' : ''}`}
               >
                 {p}
               </p>

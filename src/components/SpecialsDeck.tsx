@@ -212,7 +212,7 @@ function CardFace({ special: s, first }: { special: Special; first: boolean }) {
           slip ? 'text-fc-ink' : 'bg-linear-to-t from-fc-ink/90 via-fc-ink/45 to-transparent pt-28 text-fc-white'
         }`}
       >
-        <p className="m-0 font-ns-victor text-xl leading-tight font-bold tracking-tight @sm:text-2xl @lg:text-[2rem]">{s.name}</p>
+        <p className="m-0 font-fc-logo text-xl leading-tight tracking-[-0.01em] @sm:text-2xl @lg:text-[2rem]">{s.name}</p>
         <p className="mt-1.5 mb-0 max-w-sm text-base leading-snug opacity-85 @sm:text-lg">{s.blurb}</p>
         {s.terms && <p className="mt-1 mb-0 text-sm opacity-70">{s.terms}</p>}
       </div>

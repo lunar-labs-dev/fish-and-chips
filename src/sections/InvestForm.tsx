@@ -35,8 +35,8 @@ export function InvestForm() {
     <section id="apply" className="scroll-mt-20 bg-fc-white py-20 md:py-28">
       <div className="mx-auto grid max-w-7xl gap-14 px-4 md:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
-          <h2 className="m-0 font-ns-victor text-5xl leading-none font-bold tracking-[-0.04em] md:text-6xl">
-            Apply to <span className="font-semibold text-fc-red italic">invest</span>
+          <h2 className="m-0 font-fc-logo text-5xl leading-none tracking-[-0.01em] md:text-6xl">
+            Apply to <span className="text-fc-red italic">invest</span>
           </h2>
           <p className="mt-6 mb-0 max-w-sm text-xl leading-snug text-fc-ink-soft">
             Tell us about yourself and where you would like to open. Head office reviews every application in the order it arrives.

@@ -46,5 +46,8 @@ deck reads [src/data/specials.ts](src/data/specials.ts): add a square photo to `
 - The real specials for the hero deck, with square photos of 1200px or more. Two menu items stand in
   for now, using the hero photo and a crop of the August 2026 new menu banner.
 - The till slip voucher terms: how long a slip stays valid, which stores honour it, and any exclusions.
+- The logo's typeface. Headings use Sorts Mill Goudy (open licence), the closest free match to the logo
+  lettering. If the client licenses the real font for the web, point `--font-fc-logo` in
+  [src/styles/global.css](src/styles/global.css) at it.
 - The fish weight for each hake size (regular, medium, large). The menu shows a growing fish icon per
   size until then.

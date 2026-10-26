@@ -15,7 +15,7 @@ export function Press() {
           <article className="paper-aged relative px-4 py-6 text-fc-ink shadow-[0_30px_60px_-30px_rgb(35_31_32/0.45),0_2px_6px_rgb(35_31_32/0.12)] md:px-12 md:py-12">
             <header className="grid grid-cols-2 items-center gap-3 border-t border-fc-ink pt-5 pb-5 md:gap-6 lg:grid-cols-[11rem_1fr_11rem] lg:pt-7 lg:pb-7">
               <Ear label="Weather">Golden and crisp, with a light drizzle of vinegar.</Ear>
-              <h2 className="order-first col-span-2 m-0 text-center font-ns-victor text-[clamp(2.4rem,10vw,6.75rem)] leading-[0.95] font-bold tracking-[-0.05em] text-balance italic lg:order-none lg:col-span-1">
+              <h2 className="order-first col-span-2 m-0 text-center font-fc-logo text-[clamp(2.4rem,10vw,6.75rem)] leading-[0.95] tracking-[-0.01em] text-balance italic lg:order-none lg:col-span-1">
                 The Daily Catch
               </h2>
               <Ear label="Motto">
@@ -33,7 +33,7 @@ export function Press() {
             <div className="mt-8 grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-0 lg:divide-x lg:divide-fc-ink/40">
               <section className="lg:pr-10">
                 <a href={interview702.href} target="_blank" rel="noopener noreferrer" className="group block text-fc-ink no-underline">
-                  <h3 className="m-0 font-ns-victor text-[clamp(1.9rem,5vw,3.25rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase group-hover:text-fc-red">
+                  <h3 className="m-0 font-fc-logo text-[clamp(1.9rem,5vw,3.25rem)] leading-[0.95] tracking-[-0.01em] uppercase group-hover:text-fc-red">
                     {interview702.title}
                   </h3>
                 </a>
@@ -42,18 +42,22 @@ export function Press() {
                 </p>
                 <div className="mt-6 grid gap-6 md:grid-cols-[minmax(0,15rem)_1fr]">
                   <figure className="m-0 mx-auto w-full max-w-60 md:max-w-none">
-                    <img
-                      src={url('/images/interview-702-400.webp')}
-                      alt="The Fish and Chip Shop team in the 702 radio studio"
-                      width={400}
-                      height={451}
-                      loading="lazy"
-                      className="block w-full -rotate-2 drop-shadow-[0_10px_14px_rgb(35_31_32/0.3)] transition-transform duration-500 ease-fc-out hover:rotate-0"
-                    />
+                    {/* The polaroid's own caption says click to listen, so it links to the interview too. */}
+                    <a href={interview702.href} target="_blank" rel="noopener noreferrer" className="group block">
+                      <img
+                        src={url('/images/interview-702-400.webp')}
+                        alt="Listen to the 702 interview: the team in the 702 radio studio"
+                        width={400}
+                        height={451}
+                        loading="lazy"
+                        className="block w-full -rotate-2 drop-shadow-[0_10px_14px_rgb(35_31_32/0.3)] transition-transform duration-500 ease-fc-out group-hover:rotate-0 group-focus-visible:rotate-0"
+                      />
+                      <span className="sr-only">, opens 702 in a new tab</span>
+                    </a>
                     <figcaption className="mt-3 text-sm leading-snug italic">Pictured: the team in the 702 studio.</figcaption>
                   </figure>
                   <div className="text-lg leading-relaxed hyphens-auto md:text-justify">
-                    <p className="m-0 first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-ns-victor first-letter:text-6xl first-letter:leading-[0.8] first-letter:font-bold">
+                    <p className="m-0 first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-fc-logo first-letter:text-6xl first-letter:leading-[0.8]">
                       {interview702.description}
                     </p>
                     <p className="mt-4 mb-0">
@@ -82,7 +86,7 @@ export function Press() {
             </div>
 
             <section className="mt-8 border-4 border-double border-fc-ink p-4 md:p-6">
-              <h3 className="m-0 border-b border-fc-ink pb-2 text-center font-ns-victor text-xl font-bold tracking-[0.15em] uppercase">Classifieds</h3>
+              <h3 className="m-0 border-b border-fc-ink pb-2 text-center font-fc-logo text-xl tracking-[0.15em] uppercase">Classifieds</h3>
               <div className="mt-4 grid gap-5 text-base leading-snug md:grid-cols-2 md:divide-x md:divide-fc-ink/40">
                 <p className="m-0 md:pr-6 md:text-justify">
                   <strong className="font-ns-victor uppercase">Wanted.</strong> Hungry people with a taste for proper hake and chips. Apply in person at any of our stores.{' '}
@@ -118,7 +122,7 @@ function Ear({ label, children, className = '' }: { label: string; children: Rea
 function Clipping({ quote: q }: { quote: PressQuote }) {
   return (
     <article className="py-5">
-      <h3 className="m-0 font-ns-victor text-base leading-tight font-bold tracking-wide uppercase">{q.outlet}</h3>
+      <h3 className="m-0 font-fc-logo text-base leading-tight tracking-[0.08em] uppercase">{q.outlet}</h3>
       <blockquote className="mt-3 mb-0 text-lg leading-snug hyphens-auto md:text-justify">“{q.quote}”</blockquote>
       {(q.year || q.href) && (
         <p className="mt-3 mb-0 flex flex-wrap items-baseline gap-x-3 text-sm">

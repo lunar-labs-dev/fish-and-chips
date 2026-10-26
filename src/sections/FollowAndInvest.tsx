@@ -7,8 +7,8 @@ export function FollowAndInvest() {
     <section aria-label="Follow us and invest" className="bg-fc-white py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl gap-5 px-4 md:px-8 lg:grid-cols-2">
         <div className="reveal bg-tiles flex flex-col rounded-[2rem] p-8 ring-1 ring-fc-grout md:p-12">
-          <h2 className="m-0 font-ns-victor text-4xl leading-none font-bold tracking-[-0.04em] md:text-5xl">
-            Follow the <span className="font-semibold text-fc-red italic">frying</span>
+          <h2 className="m-0 font-fc-logo text-4xl leading-none tracking-[-0.01em] md:text-5xl">
+            Follow the <span className="text-fc-red italic">frying</span>
           </h2>
           <p className="mt-5 mb-0 max-w-md text-xl leading-snug text-fc-ink-soft">
             New dishes, store openings and the odd golden close up. Come say hello.
@@ -25,8 +25,8 @@ export function FollowAndInvest() {
         </div>
 
         <div className="reveal flex flex-col rounded-[2rem] bg-fc-red p-8 text-fc-white md:p-12" style={{ '--delay': '120ms' } as React.CSSProperties}>
-          <h2 className="m-0 font-ns-victor text-4xl leading-none font-bold tracking-[-0.04em] md:text-5xl">
-            Open a shop <span className="font-semibold italic">with us</span>
+          <h2 className="m-0 font-fc-logo text-4xl leading-none tracking-[-0.01em] md:text-5xl">
+            Open a shop <span className="italic">with us</span>
           </h2>
           <p className="mt-5 mb-0 max-w-md text-xl leading-snug text-fc-white/90">
             We are growing across Gauteng and looking for partners who love good food as much as we do. Silent or active, existing site or not.

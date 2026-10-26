@@ -24,8 +24,8 @@ export function Menu() {
     <section id="menu" className="scroll-mt-20 bg-fc-white py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="m-0 font-ns-victor text-5xl leading-none font-bold tracking-[-0.04em] md:text-7xl">
-            The <span className="font-semibold text-fc-red italic">menu</span>
+          <h2 className="m-0 font-fc-logo text-5xl leading-none tracking-[-0.01em] md:text-7xl">
+            The <span className="text-fc-red italic">menu</span>
           </h2>
           <div className="flex flex-col gap-4 lg:max-w-md lg:items-end lg:text-right">
             <p className="m-0 text-xl leading-snug text-fc-ink-soft">Fresh hake, hand cut chips and a few local legends. Pick a section to browse.</p>
@@ -116,7 +116,7 @@ function TillSlipDeal() {
     <div className="reveal mt-24 grid items-center gap-8 rounded-[2rem] bg-fc-lemon px-6 pb-10 md:grid-cols-[auto_1fr] md:gap-14 md:px-12 md:py-10">
       <TillSlip className="mx-auto -mt-12 -rotate-3 text-[11px] sm:text-xs md:-my-24 md:text-sm" />
       <div className="max-md:text-center">
-        <h3 className="m-0 font-ns-victor text-3xl leading-tight font-bold tracking-tight md:text-5xl">Bring back your till slip</h3>
+        <h3 className="m-0 font-fc-logo text-3xl leading-tight tracking-[-0.01em] md:text-5xl">Bring back your till slip</h3>
         <p className="mt-4 mb-0 max-w-xl text-xl leading-snug max-md:mx-auto md:text-2xl">
           Keep the slip from today’s order and bring it along next time. We’ll take 10% off your next order.
         </p>
@@ -130,7 +130,7 @@ function MenuPanel({ category: c }: { category: MenuCategory }) {
   return (
     <>
       <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:gap-5">
-        <h3 className="m-0 font-ns-victor text-4xl font-bold tracking-tight md:text-5xl">{c.name}</h3>
+        <h3 className="m-0 font-fc-logo text-4xl tracking-[-0.01em] md:text-5xl">{c.name}</h3>
         <p className="m-0 text-xl text-fc-red italic">{c.tagline}</p>
       </div>
       {c.intro && <p className="mt-3 mb-0 max-w-2xl text-lg text-fc-ink-soft">{c.intro}</p>}
@@ -150,7 +150,7 @@ function MenuRow({ item }: { item: MenuItem }) {
   return (
     <li className="border-b border-dashed border-fc-ink/20 py-5">
       <div className="flex items-baseline gap-3">
-        <h4 className="m-0 flex items-baseline gap-2 font-ns-victor text-xl font-bold tracking-tight md:text-2xl">
+        <h4 className="m-0 flex items-baseline gap-2 font-fc-logo text-xl tracking-[-0.01em] md:text-2xl">
           {item.name}
           {item.greenvalleyOnly && (
             <span className="translate-y-0.5 self-center">

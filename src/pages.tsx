@@ -59,10 +59,10 @@ function InvestSections() {
     <>
       <section className="bg-tiles border-b border-fc-grout pt-32 pb-20 md:pt-44 md:pb-28">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <h1 className="rise m-0 max-w-4xl font-ns-victor text-[clamp(2.75rem,9vw,6.5rem)] leading-[0.95] font-bold tracking-[-0.04em]">
+          <h1 className="rise m-0 max-w-4xl font-fc-logo text-[clamp(2.75rem,9vw,6.5rem)] leading-[0.95] tracking-[-0.01em]">
             <span style={{ '--i': 0 } as React.CSSProperties}>Bring the chippie&nbsp;</span>
             <span style={{ '--i': 1 } as React.CSSProperties}>to your&nbsp;</span>
-            <span style={{ '--i': 2 } as React.CSSProperties} className="font-semibold text-fc-red italic">
+            <span style={{ '--i': 2 } as React.CSSProperties} className="text-fc-red italic">
               corner.
             </span>
           </h1>
@@ -80,7 +80,7 @@ function InvestSections() {
                 className="reveal rounded-3xl bg-fc-white p-7 ring-1 ring-fc-grout md:p-8"
                 style={{ '--delay': `${i * 80}ms` } as React.CSSProperties}
               >
-                <h2 className="m-0 font-ns-victor text-2xl font-bold tracking-tight md:text-3xl">{r.title}</h2>
+                <h2 className="m-0 font-fc-logo text-2xl tracking-[-0.01em] md:text-3xl">{r.title}</h2>
                 <p className="mt-3 mb-0 text-lg leading-snug text-fc-ink-soft">{r.body}</p>
               </li>
             ))}

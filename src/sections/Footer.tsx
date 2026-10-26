@@ -19,7 +19,7 @@ export function Footer() {
           <div className="grid gap-8 sm:grid-cols-3 md:order-last md:col-span-2 lg:order-none lg:col-span-1">
             {stores.map((s) => (
               <div key={s.id}>
-                <h2 className="m-0 font-ns-victor text-base font-bold text-fc-lemon">{s.name}</h2>
+                <h2 className="m-0 font-fc-logo text-lg text-fc-lemon">{s.name}</h2>
                 <address className="mt-3 text-base leading-snug text-fc-white/75 not-italic">
                   {s.address.map((line) => (
                     <span key={line} className="block">
@@ -36,7 +36,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="m-0 font-ns-victor text-base font-bold text-fc-lemon">Explore</h2>
+            <h2 className="m-0 font-fc-logo text-lg text-fc-lemon">Explore</h2>
             <ul className="mt-3 grid list-none gap-2 p-0">
               {navLinks.map((l) => (
                 <li key={l.href}>

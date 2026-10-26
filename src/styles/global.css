@@ -1,8 +1,10 @@
-/* Self hosted variable fonts, upright and italic. */
+/* Self hosted fonts, upright and italic. */
 @import "@fontsource-variable/victor-mono";
 @import "@fontsource-variable/victor-mono/wght-italic.css";
 @import "@fontsource-variable/newsreader";
 @import "@fontsource-variable/newsreader/wght-italic.css";
+@import "@fontsource/sorts-mill-goudy/latin-400.css";
+@import "@fontsource/sorts-mill-goudy/latin-400-italic.css";
 @import "tailwindcss";
 
 /* Modern chippie: white tiles, newsprint, the logo's print black, vinegar red. */
@@ -20,6 +22,8 @@
 
   --font-ns-victor: 'Victor Mono Variable', 'Victor Mono', ui-monospace, monospace;
   --font-fc-serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
+  /* Closest open licence match to the logo's lettering (Goudy Old Style); only a regular weight, so headings stay unbolded. */
+  --font-fc-logo: 'Sorts Mill Goudy', 'Goudy Old Style', Georgia, serif;
 
   --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
 

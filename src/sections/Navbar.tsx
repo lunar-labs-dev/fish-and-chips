@@ -109,7 +109,7 @@ export function Navbar() {
               <a
                 href={url(l.href)}
                 onClick={() => setOpen(false)}
-                className="block py-2 font-ns-victor text-4xl font-bold tracking-tight text-fc-ink hover:text-fc-red"
+                className="block py-2 font-fc-logo text-4xl tracking-[-0.01em] text-fc-ink hover:text-fc-red"
               >
                 {l.label}
               </a>
