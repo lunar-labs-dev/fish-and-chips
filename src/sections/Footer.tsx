@@ -2,10 +2,11 @@ import { brand, builtByLunarLabs, navLinks, stores, telHref } from '../data/site
 import { url } from '../lib/url';
 import { Bubbles } from './Sea';
 
-// Underwater footer, below the sea line: every store's contacts, sitemap, socials, then the LUNARLABS credit.
+// Underwater footer, below the sea line. A short fade just above it, where the docked water line sits, runs the swell in.
+// Every store's contacts, sitemap, socials, then the LUNARLABS credit.
 export function Footer() {
   return (
-    <footer className="caustics relative bg-fc-ink text-fc-white">
+    <footer className="caustics relative bg-fc-ink text-fc-white before:pointer-events-none before:absolute before:inset-x-0 before:bottom-full before:h-6 before:bg-linear-to-b before:from-fc-ink/0 before:to-fc-ink before:content-['']">
       <Bubbles />
       <div className="relative mx-auto max-w-7xl px-4 pt-20 pb-10 md:px-8">
         <div className="grid gap-12 border-b border-fc-white/15 pb-12 md:grid-cols-[1fr_0.6fr] lg:grid-cols-[1fr_2fr_0.7fr]">

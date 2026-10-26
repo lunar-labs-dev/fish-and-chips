@@ -1,6 +1,19 @@
+import type { Ref } from 'react';
+
+type Props = {
+  className?: string;
+  /** Whips the rod for a catch, on top of the idle sway. Rotates about his hands. */
+  rod?: Ref<SVGGElement>;
+  /** The line and lure, faded out while a catch is in the air. */
+  line?: Ref<SVGGElement>;
+  /** The lure, twitched on each click. */
+  lure?: Ref<SVGGElement>;
+  onLure?: () => void;
+};
+
 // A small old fisherman in pen and ink, sat on the edge of whatever holds him, fishing off it. The seat line is y=150 in
 // the viewBox, so the parent lines that up with its top edge. A displacement filter wobbles every stroke like a nib.
-export function Fisherman({ className = '' }: { className?: string }) {
+export function Fisherman({ className = '', rod, line, lure, onLure }: Props) {
   return (
     <svg viewBox="0 0 200 260" aria-hidden="true" className={`overflow-visible ${className}`}>
       <defs>
@@ -11,15 +24,22 @@ export function Fisherman({ className = '' }: { className?: string }) {
       </defs>
       <g filter="url(#nib)" className="stroke-fc-ink" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         {/* Rod, line and float sway together from his hands; the float also bobs. */}
-        <g className="animate-sway [transform-box:view-box]" style={{ transformOrigin: '112px 124px' }}>
-          <path d="M146 140 112 124Q66 92 20 40" className="fill-none" strokeWidth="2.2" />
-          <path d="M146 140 136 135" className="fill-none" strokeWidth="4" />
-          <path d="M20 40 21 196" className="fill-none" strokeWidth="0.8" />
-          <g className="animate-bob [transform-box:fill-box]" style={{ transformOrigin: '50% 0%' }}>
-            <path d="M21 196v6" className="fill-none" strokeWidth="0.8" />
-            <ellipse cx="21" cy="209" rx="5.5" ry="7.5" className="fill-fc-white" />
-            <path d="M15.5 207.5a5.5 7.5 0 0 1 11 0Z" className="fill-fc-red" />
-            <path d="M21 216.5v10q0 5-4 5t-3.5-4" className="fill-none" strokeWidth="1.1" />
+        <g ref={rod} className="[transform-box:view-box]" style={{ transformOrigin: '112px 124px' }}>
+          <g className="animate-sway [transform-box:view-box]" style={{ transformOrigin: '112px 124px' }}>
+            <path d="M146 140 112 124Q66 92 20 40" className="fill-none" strokeWidth="2.2" />
+            <path d="M146 140 136 135" className="fill-none" strokeWidth="4" />
+            <g ref={line}>
+              <path d="M20 40 21 196" className="fill-none" strokeWidth="0.8" />
+              <g ref={lure} onClick={onLure} className={onLure ? 'pointer-events-auto cursor-pointer' : ''}>
+                <g className="animate-bob [transform-box:fill-box]" style={{ transformOrigin: '50% 0%' }}>
+                  <circle cx="21" cy="212" r="18" fill="transparent" stroke="none" />
+                  <path d="M21 196v6" className="fill-none" strokeWidth="0.8" />
+                  <ellipse cx="21" cy="209" rx="5.5" ry="7.5" className="fill-fc-white" />
+                  <path d="M15.5 207.5a5.5 7.5 0 0 1 11 0Z" className="fill-fc-red" />
+                  <path d="M21 216.5v10q0 5-4 5t-3.5-4" className="fill-none" strokeWidth="1.1" />
+                </g>
+              </g>
+            </g>
           </g>
         </g>
 

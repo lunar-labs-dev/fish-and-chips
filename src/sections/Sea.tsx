@@ -1,4 +1,12 @@
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Fisherman } from '../components/Fisherman';
+
+const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+const SETTLE = 'cubic-bezier(0.45, 0, 0.55, 1)';
+const CLICKS_TO_CATCH = 3;
+const MAX_IN_BOAT = 3;
+// In the boat box (200 by 160): from the lure in the water, up over his head, down into the boat.
+const FLIGHT = "path('M-35 125Q20-70 112 92')";
 
 // One 240px wave tile; the strip is 240px wider than the screen and drifts one tile, so the loop is seamless.
 const wave = (crest: number, fill: number, line: number) =>
@@ -9,12 +17,56 @@ const wave = (crest: number, fill: number, line: number) =>
 // A greyscale sea surface pinned above the bottom of the screen. It is sticky, so once the footer scrolls up it rides on
 // the footer's top edge and the footer sits underwater. The old boy fishes off the side of his rowboat on it.
 export function Sea() {
+  const rod = useRef<SVGGElement>(null);
+  const line = useRef<SVGGElement>(null);
+  const lure = useRef<SVGGElement>(null);
+  const fish = useRef<HTMLDivElement>(null);
+  const clicks = useRef(0);
+  const busy = useRef(false);
+  const [caught, setCaught] = useState(0);
+
+  // The flying fish holds its landing pose until the resting one is drawn in its place, then lets go before paint.
+  useLayoutEffect(() => {
+    fish.current?.getAnimations().forEach((a) => a.cancel());
+    busy.current = false;
+  }, [caught]);
+
+  // Each click dips the lure; the third whips a fish into the boat. The whip is layered over the idle sway, so the rod
+  // eases back into it without a jump.
+  function onLure() {
+    if (busy.current) return;
+    if (++clicks.current < CLICKS_TO_CATCH) {
+      lure.current!.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(5px)' }, { transform: 'translateY(0)' }], { duration: 320, easing: EASE });
+      return;
+    }
+    clicks.current = 0;
+    busy.current = true;
+    const land = () => setCaught((n) => n + 1);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return land();
+    console.assert(!!(rod.current && line.current && fish.current), 'Sea: catch refs missing');
+    rod.current!.animate(
+      [{ transform: 'rotate(0deg)', easing: EASE }, { transform: 'rotate(40deg)', offset: 0.2, easing: SETTLE }, { transform: 'rotate(0deg)' }],
+      { duration: 1800 },
+    );
+    line.current!.animate([{ opacity: 1 }, { opacity: 0, offset: 0.08 }, { opacity: 0, offset: 0.7 }, { opacity: 1 }], { duration: 1800 });
+    fish.current!.animate(
+      [
+        { opacity: 1, offsetDistance: '0%' },
+        { opacity: 1, offsetDistance: '100%' },
+      ],
+      { duration: 900, delay: 120, easing: 'cubic-bezier(0.3, 0.1, 0.35, 1)', fill: 'forwards' },
+    ).onfinish = land;
+  }
+
   return (
     <div aria-hidden="true" className="pointer-events-none sticky bottom-0 z-40 -mt-40 h-40 overflow-x-clip">
       <div className="absolute bottom-2 left-0 h-16 w-[calc(100%+240px)] animate-wave-back" style={{ backgroundImage: wave(18, 0.05, 0.22) }} />
 
-      <div className="absolute right-2 bottom-0 h-full w-[200px] origin-bottom-right scale-75 md:right-auto md:left-[6%] md:scale-100">
+      <div className="absolute right-2 bottom-0 h-full w-[200px] origin-bottom-right scale-75 md:right-[6%] md:scale-100">
         <div className="size-full origin-bottom animate-rock">
+          {Array.from({ length: Math.min(caught, MAX_IN_BOAT) }, (_, i) => (
+            <Fish key={i} className="absolute top-[86px] w-8" style={{ left: 96 + i * 24, rotate: `${-28 + i * 14}deg` }} />
+          ))}
         <svg viewBox="0 0 200 70" className="absolute -bottom-1 left-0 w-[200px] overflow-visible">
           <g filter="url(#nib)" className="stroke-fc-ink" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 4q96 14 192-2l-16 52q-80 12-154 0Z" className="fill-fc-red" />
@@ -27,12 +79,29 @@ export function Sea() {
             EST. 2018
           </text>
         </svg>
-        <Fisherman className="absolute bottom-1 -left-12 w-[120px]" />
+        <Fisherman className="absolute bottom-1 -left-12 w-[120px]" rod={rod} line={line} lure={lure} onLure={onLure} />
+          <div ref={fish} className="absolute top-0 left-0 opacity-0 [offset-rotate:auto]" style={{ offsetPath: FLIGHT }}>
+            <Fish className="w-8" />
+          </div>
         </div>
       </div>
 
       <div className="absolute bottom-0 left-0 h-16 w-[calc(100%+240px)] animate-wave" style={{ backgroundImage: wave(22, 0.2, 0.55) }} />
     </div>
+  );
+}
+
+// A small pen and ink fish, nose to the right.
+function Fish({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 32 14" className={`overflow-visible ${className}`} style={style}>
+      <g className="stroke-fc-ink" strokeWidth="1.2" strokeLinejoin="round">
+        <path d="M1 1.5 8 7 1 12.5Z" className="fill-fc-red" />
+        <path d="M7 7c4-6 15-7 23 0-8 7-19 6-23 0Z" className="fill-fc-white" />
+        <path d="M12 4.5q2 2.5 0 5" className="fill-none" />
+        <circle cx="25" cy="6" r="1" className="fill-fc-ink" />
+      </g>
+    </svg>
   );
 }
 
