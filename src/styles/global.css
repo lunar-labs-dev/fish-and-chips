@@ -23,22 +23,30 @@
 
   --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Home page splash: a fish leaps from layered waves and dives back in, the name settles, then the overlay fades. */
-  /* The jump easing keeps horizontal speed constant along the arc, like a real leap; 2.6s is when the hero takes over. */
-  --animate-fish-jump: fish-jump 1.5s cubic-bezier(0.42, 0.74, 0.58, 0.26) 0.35s both, fish-stretch 1.5s linear 0.35s both;
-  --animate-tail: tail 0.26s ease-in-out infinite alternate;
+  /* Hero specials: the bar fills over each card's turn, and the deck deals the next card when it is full. */
+  --animate-deck-timer: deck-timer 6s linear both;
+  @keyframes deck-timer {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  /* Home page splash: a fish leaps from layered waves in slow motion and dives back in, the name settles, then the overlay fades. */
+  /* The jump easing keeps horizontal speed constant along the arc, like a real leap; 4s is when the hero takes over. */
+  --animate-fish-jump: fish-jump 2.4s cubic-bezier(0.42, 0.74, 0.58, 0.26) 0.5s both, fish-stretch 2.4s linear 0.5s both;
+  --animate-tail: tail 0.36s ease-in-out infinite alternate;
   --animate-wave: wave 5s linear infinite;
   --animate-wave-mid: wave 7s linear infinite reverse;
   --animate-wave-back: wave 10s linear infinite;
-  --animate-crown: crown 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  --animate-ripple: ripple 1s cubic-bezier(0.2, 0.6, 0.3, 1) both;
-  --animate-bubble: bubble 0.9s cubic-bezier(0.3, 0.6, 0.4, 1) both;
-  --animate-drop-x: drop-x 0.9s linear both;
-  --animate-drop-y: drop-y 0.9s both;
-  --animate-word-in: word-in 0.7s var(--ease-fc-out) both;
-  --animate-rule-in: rule-in 0.8s var(--ease-fc-out) both;
-  --animate-scene-out: scene-out 0.5s ease-in-out 2.6s both;
-  --animate-splash-out: splash-out 0.5s ease-in-out 2.6s forwards;
+  --animate-crown: crown 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  --animate-ripple: ripple 1.6s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+  --animate-bubble: bubble 1.4s cubic-bezier(0.3, 0.6, 0.4, 1) both;
+  --animate-drop-x: drop-x 1.4s linear both;
+  --animate-drop-y: drop-y 1.4s both;
+  --animate-word-in: word-in 0.8s var(--ease-fc-out) both;
+  --animate-rule-in: rule-in 0.9s var(--ease-fc-out) both;
+  --animate-scene-out: scene-out 0.6s ease-in-out 4s both;
+  --animate-splash-out: splash-out 0.6s ease-in-out 4s forwards;
 
   @keyframes fish-jump {
     from {

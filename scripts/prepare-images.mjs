@@ -7,6 +7,8 @@ mkdirSync(out, { recursive: true });
 
 const jobs = [
   { src: 'slider-bg-2-2.webp', name: 'hero-hake', crop: { left: 0, top: 0, width: 1130, height: 1141 }, widths: [1100, 640] },
+  // The basket from the client's August 2026 "new menu" banner, cropped clear of its lettering.
+  { src: 'PHOTO-2026-08-04-18-03-32.jpg', name: 'special-hake-basket', crop: { left: 1700, top: 320, width: 860, height: 860 }, widths: [860, 640] },
   { src: 'about-pictures.png', name: 'story-polaroids', widths: [684] },
   { src: 'image-6.png', name: 'interview-702', widths: [400] },
   { src: 'logo-01.png', name: 'logo', widths: [360] },

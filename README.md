@@ -30,7 +30,9 @@ targets the domain root and is indexable.
 ## Editing content
 
 All copy, stores, press quotes and menu items live in [src/data/site.ts](src/data/site.ts). The
-investor requirements and terms live in [src/data/invest.ts](src/data/invest.ts).
+investor requirements and terms live in [src/data/invest.ts](src/data/invest.ts). The hero's specials
+deck reads [src/data/specials.ts](src/data/specials.ts): add a square photo to `assets-src/`, list it in
+[scripts/prepare-images.mjs](scripts/prepare-images.mjs), run `npm run images`, then point a special at it.
 
 ## Waiting on the client
 
@@ -41,3 +43,6 @@ investor requirements and terms live in [src/data/invest.ts](src/data/invest.ts)
 - Whether Waterfall Ridge has opened.
 - The logo as a vector file, and higher resolution photography.
 - A form backend for the investor application. Until then it opens a prefilled email to head office.
+- The real specials for the hero deck, with square photos of 1200px or more. Two menu items stand in
+  for now, using the hero photo and a crop of the August 2026 new menu banner.
+- The till slip voucher terms: how long a slip stays valid, which stores honour it, and any exclusions.

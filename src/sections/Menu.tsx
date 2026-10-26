@@ -2,6 +2,7 @@ import { useRef, useState, type KeyboardEvent } from 'react';
 import { AnimatePresence, m } from 'motion/react';
 import { menuCategories, menuPdf, menuSmallPrint, type MenuCategory, type MenuItem } from '../data/menu';
 import { url } from '../lib/url';
+import { TillSlip } from '../components/TillSlip';
 
 // The full menu as tabbed categories. A pill slides between tabs and panels crossfade; inactive panels stay in the HTML, hidden, so the whole menu prerenders.
 export function Menu() {
@@ -94,6 +95,8 @@ export function Menu() {
             </div>
           ))}
 
+        <TillSlipDeal />
+
         <div className="mt-12 flex flex-col gap-4 border-t border-fc-grout pt-6 text-base text-fc-ink-soft md:flex-row md:justify-between md:gap-10">
           <p className="m-0 flex items-center gap-2">
             <GreenvalleyPin />
@@ -103,6 +106,23 @@ export function Menu() {
         </div>
       </div>
     </section>
+  );
+}
+
+// The bring back your slip deal: the slip pokes out of a lemon band, as if left on the counter.
+// TODO(client): confirm the voucher terms (how long a slip stays valid, which stores, any exclusions).
+function TillSlipDeal() {
+  return (
+    <div className="reveal mt-24 grid items-center gap-8 rounded-[2rem] bg-fc-lemon px-6 pb-10 md:grid-cols-[auto_1fr] md:gap-14 md:px-12 md:py-10">
+      <TillSlip className="mx-auto -mt-12 -rotate-3 text-[11px] sm:text-xs md:-my-24 md:text-sm" />
+      <div className="max-md:text-center">
+        <h3 className="m-0 font-ns-victor text-3xl leading-tight font-bold tracking-tight md:text-5xl">Bring back your till slip</h3>
+        <p className="mt-4 mb-0 max-w-xl text-xl leading-snug max-md:mx-auto md:text-2xl">
+          Keep the slip from today’s order and bring it along next time. We’ll take 10% off your next order.
+        </p>
+        <p className="mt-3 mb-0 text-base text-fc-ink/70">Ask in store for the details.</p>
+      </div>
+    </div>
   );
 }
 

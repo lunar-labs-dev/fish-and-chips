@@ -1,11 +1,11 @@
 import SplitText from '../components/SplitText';
 import { HeroSticker } from '../components/HeroSticker';
+import { SpecialsDeck } from '../components/SpecialsDeck';
 import { brand, press } from '../data/site';
-import { url } from '../lib/url';
 
 const maverick = press.find((p) => p.outlet === 'Daily Maverick')!;
 
-// Type led hero on white tiles: the headline builds letter by letter, and the year badge is a peelable sticker.
+// Type led hero on white tiles: the headline builds letter by letter beside a deck of specials, under a peelable year sticker.
 export function Hero() {
   return (
     <section id="top" className="bg-tiles relative overflow-hidden pt-28 pb-16 md:pt-36 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-28 lg:pb-20">
@@ -48,18 +48,7 @@ export function Hero() {
         </div>
 
         <div className="reveal relative mx-auto w-full max-w-xl lg:max-w-none" style={{ '--delay': '200ms' } as React.CSSProperties}>
-          <div className="relative rotate-2 overflow-hidden rounded-[2rem] border-[10px] border-fc-white shadow-[0_40px_80px_-30px_rgb(35_31_32/0.45)] transition-transform duration-700 ease-fc-out hover:rotate-0">
-            <img
-              src={url('/images/hero-hake-1100.webp')}
-              srcSet={`${url('/images/hero-hake-640.webp')} 640w, ${url('/images/hero-hake-1100.webp')} 1100w`}
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              alt="Golden grilled hake on a basket of skin on chips with a lemon wedge, coleslaw and savoury rice on the side"
-              width={1100}
-              height={1111}
-              fetchPriority="high"
-              className="block aspect-square w-full object-cover"
-            />
-          </div>
+          <SpecialsDeck />
           <HeroSticker year={brand.founded} />
         </div>
       </div>
