@@ -23,13 +23,22 @@
 
   --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Home page splash: a fish leaps out of the waves, splashes back in, then the overlay fades. */
-  --animate-fish-jump: fish-jump 1s cubic-bezier(0.3, 0, 0.7, 1) 0.2s both;
-  --animate-wave: wave 2.4s linear infinite;
-  --animate-wave-back: wave 3.4s linear infinite reverse;
-  --animate-drop: drop 0.75s cubic-bezier(0.2, 0.7, 0.4, 1) both;
-  --animate-logo-in: logo-in 0.6s var(--ease-fc-out) 1s both;
-  --animate-splash-out: splash-out 0.45s ease-in 1.85s forwards;
+  /* Home page splash: a fish leaps from layered waves and dives back in, the name settles, then the overlay fades. */
+  /* The jump easing keeps horizontal speed constant along the arc, like a real leap; 2.6s is when the hero takes over. */
+  --animate-fish-jump: fish-jump 1.5s cubic-bezier(0.42, 0.74, 0.58, 0.26) 0.35s both, fish-stretch 1.5s linear 0.35s both;
+  --animate-tail: tail 0.26s ease-in-out infinite alternate;
+  --animate-wave: wave 5s linear infinite;
+  --animate-wave-mid: wave 7s linear infinite reverse;
+  --animate-wave-back: wave 10s linear infinite;
+  --animate-crown: crown 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  --animate-ripple: ripple 1s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+  --animate-bubble: bubble 0.9s cubic-bezier(0.3, 0.6, 0.4, 1) both;
+  --animate-drop-x: drop-x 0.9s linear both;
+  --animate-drop-y: drop-y 0.9s both;
+  --animate-word-in: word-in 0.7s var(--ease-fc-out) both;
+  --animate-rule-in: rule-in 0.8s var(--ease-fc-out) both;
+  --animate-scene-out: scene-out 0.5s ease-in-out 2.6s both;
+  --animate-splash-out: splash-out 0.5s ease-in-out 2.6s forwards;
 
   @keyframes fish-jump {
     from {
@@ -39,31 +48,108 @@
       offset-distance: 100%;
     }
   }
-  @keyframes wave {
-    to {
-      transform: translateX(-360px);
-    }
-  }
-  @keyframes drop {
+  @keyframes fish-stretch {
     0% {
-      transform: translate(0, 0) scale(0.4);
-      opacity: 0;
+      transform: scale(1.12, 0.9);
     }
-    15% {
-      opacity: 1;
-    }
-    55% {
-      transform: translate(calc(var(--dx) * 0.7), var(--dy)) scale(1);
+    30%,
+    70% {
+      transform: scale(1, 1);
     }
     100% {
-      transform: translate(var(--dx), 14px) scale(0.6);
+      transform: scale(1.1, 0.92);
+    }
+  }
+  @keyframes tail {
+    from {
+      transform: rotate(-16deg);
+    }
+    to {
+      transform: rotate(16deg);
+    }
+  }
+  @keyframes wave {
+    to {
+      transform: translateX(-480px);
+    }
+  }
+  @keyframes crown {
+    0% {
+      transform: scale(0.4, 0);
+    }
+    35% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1.2, 0);
+    }
+  }
+  @keyframes ripple {
+    from {
+      transform: scale(0.2);
+      opacity: 0.9;
+    }
+    to {
+      transform: scale(1);
       opacity: 0;
     }
   }
-  @keyframes logo-in {
+  @keyframes bubble {
+    from {
+      transform: translateY(0) scale(0.6);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.9;
+    }
+    to {
+      transform: translateY(-28px) scale(1);
+      opacity: 0;
+    }
+  }
+  /* Droplets: x drifts linearly while y rises with ease out and falls with ease in, so each one traces a parabola. */
+  @keyframes drop-x {
+    0% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    10%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(var(--dx));
+      opacity: 0;
+    }
+  }
+  @keyframes drop-y {
+    0% {
+      transform: translateY(0) scale(0.5);
+      animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    }
+    45% {
+      transform: translateY(var(--dy)) scale(1);
+      animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    }
+    100% {
+      transform: translateY(26px) scale(0.8);
+    }
+  }
+  @keyframes word-in {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
+      filter: blur(6px);
+    }
+  }
+  @keyframes rule-in {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes scene-out {
+    to {
+      transform: translateY(-14px);
     }
   }
   @keyframes splash-out {

@@ -36,38 +36,69 @@
       aria-hidden="true"
       onclick="this.remove()"
       onanimationend="event.target === this && this.remove()"
-      class="fixed inset-0 z-[100] hidden cursor-pointer flex-col items-center justify-center gap-4 bg-fc-white md:gap-14 animate-splash-out [.splash_&]:flex"
+      class="fixed inset-0 z-[100] hidden cursor-pointer items-center justify-center overflow-hidden bg-fc-white animate-splash-out [.splash_&]:flex"
     >
-      <div class="relative h-60 w-90 overflow-hidden max-sm:scale-90 md:scale-125">
-        <svg class="absolute bottom-0 left-0 h-16 w-[720px] animate-wave-back fill-fc-ink/15" viewBox="0 0 720 64"><path d="M0 14 q22.5 -9 45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 V64 H0Z" /></svg>
-          <svg class="absolute top-0 left-0 w-20 animate-fish-jump [offset-path:path('M40_292_Q180_-170_320_292')]" viewBox="0 0 80 52">
-            <path d="M20 26 3 11c-3 10-3 20 0 30Z" class="fill-fc-lemon stroke-fc-ink" stroke-width="3" stroke-linejoin="round" />
-            <path d="M33 12c5-10 17-11 22-1" class="fill-fc-red stroke-fc-ink" stroke-width="3" stroke-linejoin="round" />
-            <ellipse cx="45" cy="27" rx="28" ry="18" class="fill-fc-lemon stroke-fc-ink" stroke-width="3" />
-            <path d="M31 21c5 4 5 8 0 12" class="fill-none stroke-fc-ink" stroke-width="2.5" stroke-linecap="round" />
-            <circle cx="56" cy="32" r="3" class="fill-fc-red/60" />
-            <circle cx="59" cy="21" r="6.5" class="fill-fc-white stroke-fc-ink" stroke-width="2.5" />
-            <circle cx="60.5" cy="21.5" r="3.4" class="fill-fc-ink" />
-            <circle cx="61.8" cy="19.8" r="1.2" class="fill-fc-white" />
-            <path d="M63 32c2.5 2.5 5.5 2.5 7.5-.5" class="fill-none stroke-fc-ink" stroke-width="2.5" stroke-linecap="round" />
+      <div class="flex animate-scene-out flex-col items-center gap-6">
+        <div class="relative h-65 w-120 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_18%,#000_82%,transparent),linear-gradient(#000_90%,transparent)] [mask-composite:intersect] max-sm:-my-9 max-sm:scale-[0.72]">
+          <svg class="absolute bottom-0 left-0 h-[86px] w-[960px] animate-wave-back fill-fc-ink/10" viewBox="0 0 960 86"><path d="M0 10 q60 -14 120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 V86 H0Z" /></svg>
+          <svg class="absolute bottom-0 left-0 h-[72px] w-[960px] animate-wave-mid fill-fc-ink/25" viewBox="0 0 960 72"><path d="M0 9 q40 -12 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 V72 H0Z" /></svg>
+          <svg class="absolute top-0 left-0 w-24 animate-fish-jump [offset-path:path('M90_350_Q240_-220_390_350')]" viewBox="0 0 96 60">
+            <path d="M25 30c-6-6-13-15-21-18 2 7 5 13 6 18-1 5-4 11-6 18 8-3 15-12 21-18Z" class="origin-right animate-tail fill-fc-red stroke-fc-ink [transform-box:fill-box]" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M38 16c2-10 12-16 20-15 5 1 8 5 8 11Z" class="fill-fc-red stroke-fc-ink" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M22 30c0-12.5 17-21 36-21 18 0 32 10 32 21S76 51 58 51c-19 0-36-8.5-36-21Z" class="fill-fc-lemon stroke-fc-ink" stroke-width="2.5" />
+            <path d="M36 41c10 6 26 7 40 2" class="fill-none stroke-fc-white" stroke-opacity="0.55" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M48 19c4 3 4 8 0 11M56 17c4 3.5 4 9.5 0 13" class="fill-none stroke-fc-ink/25" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M40 20c6 5 6 15 0 20" class="fill-none stroke-fc-ink" stroke-width="2.2" stroke-linecap="round" />
+            <path d="M50 34c4 6 10 9 16 8-2-6-8-10-16-8Z" class="fill-fc-red stroke-fc-ink" stroke-width="2" stroke-linejoin="round" />
+            <ellipse cx="71" cy="35" rx="3.6" ry="2.2" class="fill-fc-red/45" />
+            <circle cx="74" cy="24" r="7" class="fill-fc-white stroke-fc-ink" stroke-width="2.5" />
+            <circle cx="75.5" cy="24.5" r="3.8" class="fill-fc-ink" />
+            <circle cx="77.2" cy="22.6" r="1.4" class="fill-fc-white" />
+            <path d="M81.5 34c2 2.2 5 2.2 6.8-.4" class="fill-none stroke-fc-ink" stroke-width="2.2" stroke-linecap="round" />
           </svg>
-          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:-26px] [--dy:-48px] [animation-delay:0.38s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:-12px] [--dy:-70px] [animation-delay:0.395s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-4 animate-drop fill-fc-ink [--dx:2px] [--dy:-80px] [animation-delay:0.41s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:14px] [--dy:-62px] [animation-delay:0.425s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:28px] [--dy:-42px] [animation-delay:0.44s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:-4px] [--dy:-38px] [animation-delay:0.455s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:20px] [--dy:-28px] [animation-delay:0.47s]" style="left:68px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:-26px] [--dy:-48px] [animation-delay:0.94s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:-12px] [--dy:-70px] [animation-delay:0.955s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-4 animate-drop fill-fc-ink [--dx:2px] [--dy:-80px] [animation-delay:0.97s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3 animate-drop fill-fc-ink [--dx:14px] [--dy:-62px] [animation-delay:0.985s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-3.5 animate-drop fill-fc-ink [--dx:28px] [--dy:-42px] [animation-delay:1.0s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:-4px] [--dy:-38px] [animation-delay:1.015s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-          <svg class="absolute size-2 animate-drop fill-fc-ink/50 [--dx:20px] [--dy:-28px] [animation-delay:1.03s]" style="left:284px;top:194px" viewBox="0 0 10 12"><path d="M5 0C5 0 0 6 0 8.5a5 3.5 0 0 0 10 0C10 6 5 0 5 0Z" /></svg>
-        <svg class="absolute bottom-0 left-0 h-12 w-[720px] animate-wave fill-fc-ink" viewBox="0 0 720 48"><path d="M0 8 q22.5 -9 45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 t45 0 V48 H0Z" /></svg>
+          <svg class="absolute bottom-0 left-0 h-14 w-[960px] animate-wave fill-fc-ink" viewBox="0 0 960 56"><path d="M0 8 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V56 H0Z" /></svg>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:126px;top:238px;animation-delay:0s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:136px;top:238px;animation-delay:0.14s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:131px;top:238px;animation-delay:0.26s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+          <svg class="absolute h-4 w-20 animate-ripple fill-none stroke-fc-white" style="left:92px;top:212px;animation-delay:0.22s" viewBox="0 0 80 16"><ellipse cx="40" cy="8" rx="38" ry="6" stroke-opacity="0.8" stroke-width="1.6" /></svg>
+          <svg class="absolute h-[34px] w-[52px] origin-bottom animate-crown fill-fc-ink" style="left:106px;top:184px;animation-delay:0.5s" viewBox="0 0 52 34"><path d="M0 34C7 31 10 22 11 13c2 7 4 12 7 13 2-9 5-20 8-26 3 6 6 17 8 26 3-1 5-6 7-13 1 9 4 18 11 21Z" /></svg>
+          <svg class="absolute h-4 w-20 animate-ripple fill-none stroke-fc-white" style="left:92px;top:212px;animation-delay:0.5s" viewBox="0 0 80 16"><ellipse cx="40" cy="8" rx="38" ry="6" stroke-opacity="0.8" stroke-width="1.6" /></svg>
+          <svg class="absolute h-4 w-20 animate-ripple fill-none stroke-fc-white" style="left:92px;top:212px;animation-delay:0.66s" viewBox="0 0 80 16"><ellipse cx="40" cy="8" rx="38" ry="6" stroke-opacity="0.8" stroke-width="1.6" /></svg>
+          <span class="absolute animate-drop-x" style="left:129px;top:203px;--dx:-40px;--dy:-44px;animation-delay:0.5s;animation-duration:0.85s"><svg class="block animate-drop-y fill-fc-ink" style="width:6px;height:6px;animation-delay:0.5s;animation-duration:0.85s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:129px;top:203px;--dx:-26px;--dy:-70px;animation-delay:0.52s;animation-duration:0.9s"><svg class="block animate-drop-y fill-fc-ink" style="width:7px;height:7px;animation-delay:0.52s;animation-duration:0.9s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:128px;top:202px;--dx:-12px;--dy:-92px;animation-delay:0.54s;animation-duration:0.95s"><svg class="block animate-drop-y fill-fc-ink" style="width:9px;height:9px;animation-delay:0.54s;animation-duration:0.95s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:127px;top:201px;--dx:2px;--dy:-104px;animation-delay:0.56s;animation-duration:1.0s"><svg class="block animate-drop-y fill-fc-ink" style="width:10px;height:10px;animation-delay:0.56s;animation-duration:1.0s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:128px;top:202px;--dx:16px;--dy:-88px;animation-delay:0.58s;animation-duration:0.95s"><svg class="block animate-drop-y fill-fc-ink" style="width:8px;height:8px;animation-delay:0.58s;animation-duration:0.95s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:129px;top:203px;--dx:30px;--dy:-66px;animation-delay:0.6s;animation-duration:0.9s"><svg class="block animate-drop-y fill-fc-ink" style="width:7px;height:7px;animation-delay:0.6s;animation-duration:0.9s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:129px;top:203px;--dx:44px;--dy:-42px;animation-delay:0.62s;animation-duration:0.85s"><svg class="block animate-drop-y fill-fc-ink" style="width:6px;height:6px;animation-delay:0.62s;animation-duration:0.85s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:130px;top:204px;--dx:-6px;--dy:-56px;animation-delay:0.64s;animation-duration:0.8s"><svg class="block animate-drop-y fill-fc-ink" style="width:5px;height:5px;animation-delay:0.64s;animation-duration:0.8s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:130px;top:204px;--dx:10px;--dy:-60px;animation-delay:0.66s;animation-duration:0.8s"><svg class="block animate-drop-y fill-fc-ink" style="width:5px;height:5px;animation-delay:0.66s;animation-duration:0.8s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <svg class="absolute h-[34px] w-[52px] origin-bottom animate-crown fill-fc-ink" style="left:322px;top:184px;animation-delay:1.56s" viewBox="0 0 52 34"><path d="M0 34C7 31 10 22 11 13c2 7 4 12 7 13 2-9 5-20 8-26 3 6 6 17 8 26 3-1 5-6 7-13 1 9 4 18 11 21Z" /></svg>
+          <svg class="absolute h-4 w-20 animate-ripple fill-none stroke-fc-white" style="left:308px;top:212px;animation-delay:1.56s" viewBox="0 0 80 16"><ellipse cx="40" cy="8" rx="38" ry="6" stroke-opacity="0.8" stroke-width="1.6" /></svg>
+          <svg class="absolute h-4 w-20 animate-ripple fill-none stroke-fc-white" style="left:308px;top:212px;animation-delay:1.72s" viewBox="0 0 80 16"><ellipse cx="40" cy="8" rx="38" ry="6" stroke-opacity="0.8" stroke-width="1.6" /></svg>
+          <span class="absolute animate-drop-x" style="left:345px;top:203px;--dx:-40px;--dy:-44px;animation-delay:1.56s;animation-duration:0.85s"><svg class="block animate-drop-y fill-fc-ink" style="width:6px;height:6px;animation-delay:1.56s;animation-duration:0.85s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:345px;top:203px;--dx:-26px;--dy:-70px;animation-delay:1.58s;animation-duration:0.9s"><svg class="block animate-drop-y fill-fc-ink" style="width:7px;height:7px;animation-delay:1.58s;animation-duration:0.9s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:344px;top:202px;--dx:-12px;--dy:-92px;animation-delay:1.6s;animation-duration:0.95s"><svg class="block animate-drop-y fill-fc-ink" style="width:9px;height:9px;animation-delay:1.6s;animation-duration:0.95s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:343px;top:201px;--dx:2px;--dy:-104px;animation-delay:1.62s;animation-duration:1.0s"><svg class="block animate-drop-y fill-fc-ink" style="width:10px;height:10px;animation-delay:1.62s;animation-duration:1.0s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:344px;top:202px;--dx:16px;--dy:-88px;animation-delay:1.64s;animation-duration:0.95s"><svg class="block animate-drop-y fill-fc-ink" style="width:8px;height:8px;animation-delay:1.64s;animation-duration:0.95s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:345px;top:203px;--dx:30px;--dy:-66px;animation-delay:1.66s;animation-duration:0.9s"><svg class="block animate-drop-y fill-fc-ink" style="width:7px;height:7px;animation-delay:1.66s;animation-duration:0.9s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:345px;top:203px;--dx:44px;--dy:-42px;animation-delay:1.68s;animation-duration:0.85s"><svg class="block animate-drop-y fill-fc-ink" style="width:6px;height:6px;animation-delay:1.68s;animation-duration:0.85s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:346px;top:204px;--dx:-6px;--dy:-56px;animation-delay:1.7s;animation-duration:0.8s"><svg class="block animate-drop-y fill-fc-ink" style="width:5px;height:5px;animation-delay:1.7s;animation-duration:0.8s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <span class="absolute animate-drop-x" style="left:346px;top:204px;--dx:10px;--dy:-60px;animation-delay:1.72s;animation-duration:0.8s"><svg class="block animate-drop-y fill-fc-ink" style="width:5px;height:5px;animation-delay:1.72s;animation-duration:0.8s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" /></svg></span>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:342px;top:238px;animation-delay:1.75s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:352px;top:238px;animation-delay:1.9s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+          <svg class="absolute size-2 animate-bubble fill-none stroke-fc-white" style="left:347px;top:238px;animation-delay:2.04s" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" stroke-width="1.5" /></svg>
+        </div>
+        <p class="m-0 flex items-center gap-3 font-fc-serif text-sm font-semibold tracking-[0.3em] text-fc-ink uppercase sm:gap-4 sm:text-lg">
+          <span class="h-px w-6 origin-right animate-rule-in bg-fc-ink/40 sm:w-10" style="animation-delay:1.5s"></span>
+          <span class="inline-block animate-word-in" style="animation-delay:1.6s">The</span>
+          <span class="inline-block animate-word-in" style="animation-delay:1.67s">Fish</span>
+          <span class="inline-block animate-word-in text-fc-red italic" style="animation-delay:1.74s">&amp;</span>
+          <span class="inline-block animate-word-in" style="animation-delay:1.81s">Chip</span>
+          <span class="inline-block animate-word-in" style="animation-delay:1.88s">Shop</span>
+          <span class="h-px w-6 origin-left animate-rule-in bg-fc-ink/40 sm:w-10" style="animation-delay:1.5s"></span>
+        </p>
       </div>
-      <img src="%BASE_URL%images/logo-360.webp" alt="" width="360" height="243" class="w-32 animate-logo-in" />
     </div>
     <div id="root" data-page="home"></div>
     <script type="module" src="/src/main.tsx"></script>
