@@ -6,6 +6,7 @@ The review of the old site and the redesign goals are in [docs/site-review.md](d
 ## Stack
 
 - Vite 8, React 19, TypeScript, Tailwind CSS 4, Lenis smooth scroll
+- Newsprint and wax paper look: the original site's palette, Geist (Geist Mono for prices), Phosphor icons
 - Two pages: the one page home (`index.html`) and the investor page (`invest/index.html`)
 - Both pages are prerendered at build time (`scripts/prerender.mjs`), so crawlers get full HTML
 - `Restaurant` JSON-LD for every store is generated from `src/data/site.ts` in `vite.config.ts`
@@ -46,8 +47,5 @@ deck reads [src/data/specials.ts](src/data/specials.ts): add a square photo to `
 - The real specials for the hero deck, with square photos of 1200px or more. Two menu items stand in
   for now, using the hero photo and a crop of the August 2026 new menu banner.
 - The till slip voucher terms: how long a slip stays valid, which stores honour it, and any exclusions.
-- The logo's typeface. Headings use Sorts Mill Goudy (open licence), the closest free match to the logo
-  lettering. If the client licenses the real font for the web, point `--font-fc-logo` in
-  [src/styles/global.css](src/styles/global.css) at it.
 - The fish weight for each hake size (regular, medium, large). The menu shows a growing fish icon per
   size until then.

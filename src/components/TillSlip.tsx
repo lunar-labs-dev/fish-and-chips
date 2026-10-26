@@ -2,9 +2,9 @@
 export function TillSlip({ className = '' }: { className?: string }) {
   return (
     <div aria-hidden="true" className={`drop-shadow-[0_1em_1.2em_rgb(35_31_32/0.28)] ${className}`}>
-      <div className="w-[18em] bg-[linear-gradient(#fff,#f6f4ef)] px-[1.5em] pt-[1.6em] pb-[2.2em] font-ns-victor leading-snug text-fc-ink [mask:conic-gradient(from_-45deg_at_bottom,#0000,#000_1deg_89deg,#0000_90deg)_50%/1.1em_100%]">
+      <div className="w-[18em] bg-fc-white font-mono px-[1.5em] pt-[1.6em] pb-[2.2em] leading-snug text-fc-ink [mask:conic-gradient(from_-45deg_at_bottom,#0000,#000_1deg_89deg,#0000_90deg)_50%/1.1em_100%]">
         <p className="m-0 text-center text-[1.15em] font-bold">The Fish &amp; Chip Shop</p>
-        <p className="m-0 text-center italic">Battered with love</p>
+        <p className="m-0 text-center">Battered with love</p>
         <Rule />
         <Line left="1  Hake and chips" right="R125" />
         <Line left="1  Onion rings" right="R29" />
@@ -12,7 +12,7 @@ export function TillSlip({ className = '' }: { className?: string }) {
         <Line left="Total" right="R154" bold />
         <Rule />
         <p className="m-0 text-center text-[2.7em] leading-none font-bold">10% off</p>
-        <p className="mt-[0.3em] mb-0 text-center italic">your next order</p>
+        <p className="mt-[0.3em] mb-0 text-center">your next order</p>
         <p className="mt-[0.8em] mb-0 text-center text-[0.8em] text-fc-ink-soft">Bring this slip back next time.</p>
         <div className="mx-auto mt-[1em] h-[2.2em] w-4/5 bg-[repeating-linear-gradient(90deg,var(--color-fc-ink)_0_2px,transparent_2px_4px,var(--color-fc-ink)_4px_7px,transparent_7px_9px,var(--color-fc-ink)_9px_10px,transparent_10px_13px)]" />
       </div>

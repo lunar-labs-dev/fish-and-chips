@@ -112,14 +112,14 @@ export function SpecialsDeck() {
         ))}
       </div>
 
-      <div className="mt-7 flex items-center gap-3 md:mt-9">
+      <div className="mt-8 flex items-center gap-3 md:mt-8">
         <RoundButton label="Previous special" onClick={() => take(-1)}>
           <path d="M15 5l-7 7 7 7" />
         </RoundButton>
         <RoundButton label="Next special" onClick={() => take(1)}>
           <path d="M9 5l7 7-7 7" />
         </RoundButton>
-        <p aria-hidden="true" className="m-0 ml-1 font-ns-victor text-sm tabular-nums">
+        <p aria-hidden="true" className="m-0 ml-1 font-mono text-sm tabular-nums">
           <span className="font-bold">{String(active + 1).padStart(2, '0')}</span>
           <span className="text-fc-ink-soft"> / {String(n).padStart(2, '0')}</span>
         </p>
@@ -172,7 +172,7 @@ function DeckCard({ special, index, pos, zIndex, dir, onStep, onDrag }: CardProp
             onStep(1);
           } else if (swipe > 80) onStep(-1);
         }}
-        className={`relative size-full overflow-hidden rounded-[2rem] border-[10px] border-fc-white bg-fc-white shadow-[0_40px_80px_-30px_rgb(35_31_32/0.45)] @container ${
+        className={`relative size-full overflow-hidden rounded-sm border-8 border-fc-white bg-fc-white shadow-[0_40px_80px_-30px_rgb(7_7_7/0.45)] @container ${
           front ? 'cursor-grab active:cursor-grabbing' : ''
         }`}
       >
@@ -189,7 +189,7 @@ function CardFace({ special: s, first }: { special: Special; first: boolean }) {
   return (
     <>
       {slip ? (
-        <div className="grid size-full place-items-center bg-fc-lemon pb-[44%] text-[1.6cqw] @lg:pb-[28%] @lg:pl-[8%] @lg:text-[1.95cqw]">
+        <div className="grid size-full place-items-center bg-fc-peach pb-[44%] text-[1.6cqw] @lg:pb-[28%] @lg:pl-[8%] @lg:text-[1.95cqw]">
           <TillSlip className="-rotate-6" />
         </div>
       ) : (
@@ -208,17 +208,17 @@ function CardFace({ special: s, first }: { special: Special; first: boolean }) {
         />
       )}
       <div
-        className={`absolute inset-x-0 bottom-0 px-5 pb-5 @sm:px-6 @sm:pb-6 @lg:px-8 @lg:pb-7 ${
-          slip ? 'text-fc-ink' : 'bg-linear-to-t from-fc-ink/90 via-fc-ink/45 to-transparent pt-28 text-fc-white'
+        className={`absolute inset-x-0 bottom-0 px-4 pb-4 @sm:px-6 @sm:pb-6 @lg:px-8 @lg:pb-8 ${
+          slip ? 'text-fc-ink' : 'bg-fc-white/90 pt-4 text-fc-ink backdrop-blur-sm'
         }`}
       >
-        <p className="m-0 font-fc-logo text-xl leading-tight tracking-[-0.01em] @sm:text-2xl @lg:text-[2rem]">{s.name}</p>
-        <p className="mt-1.5 mb-0 max-w-sm text-base leading-snug opacity-85 @sm:text-lg">{s.blurb}</p>
+        <p className="m-0 text-xl leading-tight @sm:text-2xl @lg:text-3xl">{s.name}</p>
+        <p className="mt-2 mb-0 max-w-sm text-base leading-snug opacity-85 @sm:text-lg">{s.blurb}</p>
         {s.terms && <p className="mt-1 mb-0 text-sm opacity-70">{s.terms}</p>}
       </div>
-      <p className="absolute top-5 right-5 m-0 grid size-20 rotate-[8deg] place-content-center rounded-full border-4 border-fc-white bg-fc-red text-center font-ns-victor leading-none text-fc-white shadow-lg @lg:size-24">
+      <p className="absolute top-5 right-5 m-0 grid size-20 rotate-[8deg] place-content-center rounded-full border-4 border-fc-white bg-fc-red text-center font-mono leading-none text-fc-white shadow-lg @lg:size-24">
         <span className="text-2xl font-bold @lg:text-3xl">{s.price.value}</span>
-        {s.price.label && <span className="mt-1 text-sm italic">{s.price.label}</span>}
+        {s.price.label && <span className="mt-1 text-sm">{s.price.label}</span>}
       </p>
     </>
   );

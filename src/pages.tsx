@@ -8,6 +8,7 @@ import { requirements } from './data/invest';
 import { Navbar } from './sections/Navbar';
 import { Hero } from './sections/Hero';
 import { PressTicker } from './sections/PressTicker';
+import { Tagline } from './sections/Tagline';
 import { Menu } from './sections/Menu';
 import { Stores } from './sections/Stores';
 import { Story } from './sections/Story';
@@ -32,7 +33,7 @@ export function Page({ id }: { id: PageId }) {
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadMotionFeatures} strict>
-      <Navbar />
+      <Navbar page={id} />
       <main>{id === 'home' ? <HomeSections /> : <InvestSections />}</main>
       <Footer />
       </LazyMotion>
@@ -46,6 +47,7 @@ function HomeSections() {
       <Hero />
       <PressTicker />
       <Menu />
+      <Tagline />
       <Stores />
       <Story />
       <Press />
@@ -57,30 +59,30 @@ function HomeSections() {
 function InvestSections() {
   return (
     <>
-      <section className="bg-tiles border-b border-fc-grout pt-32 pb-20 md:pt-44 md:pb-28">
+      <section className="border-b border-fc-rule pt-32 pb-20 md:pb-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <h1 className="rise m-0 max-w-4xl font-fc-logo text-[clamp(2.75rem,9vw,6.5rem)] leading-[0.95] tracking-[-0.01em]">
+          <h1 className="rise m-0 max-w-4xl text-6xl md:text-8xl">
             <span style={{ '--i': 0 } as React.CSSProperties}>Bring the chippie&nbsp;</span>
             <span style={{ '--i': 1 } as React.CSSProperties}>to your&nbsp;</span>
-            <span style={{ '--i': 2 } as React.CSSProperties} className="text-fc-red italic">
+            <span style={{ '--i': 2 } as React.CSSProperties} className="text-fc-red">
               corner.
             </span>
           </h1>
           <p className="reveal mt-8 mb-0 max-w-xl text-xl leading-snug text-fc-ink-soft md:text-2xl" style={{ '--delay': '300ms' } as React.CSSProperties}>
             The Fish &amp; Chip Shop is opening across Gauteng and beyond. Partner with a family brand the press calls Joburg’s most authentic.
           </p>
-          <a href="#apply" className="btn-red reveal mt-9" style={{ '--delay': '400ms' } as React.CSSProperties}>
+          <a href="#apply" className="btn-red reveal mt-8" style={{ '--delay': '400ms' } as React.CSSProperties}>
             Start your application
           </a>
 
-          <ul className="mt-16 grid list-none gap-5 p-0 md:grid-cols-3">
+          <ul className="mt-16 grid list-none gap-4 p-0 md:grid-cols-3">
             {requirements.map((r, i) => (
               <li
                 key={r.title}
-                className="reveal rounded-3xl bg-fc-white p-7 ring-1 ring-fc-grout md:p-8"
+                className="reveal wax rounded-sm p-8"
                 style={{ '--delay': `${i * 80}ms` } as React.CSSProperties}
               >
-                <h2 className="m-0 font-fc-logo text-2xl tracking-[-0.01em] md:text-3xl">{r.title}</h2>
+                <h2 className="m-0 text-2xl md:text-3xl">{r.title}</h2>
                 <p className="mt-3 mb-0 text-lg leading-snug text-fc-ink-soft">{r.body}</p>
               </li>
             ))}

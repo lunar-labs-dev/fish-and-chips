@@ -3,7 +3,7 @@ import { brand } from '../data/site';
 import { terms } from '../data/invest';
 
 const field =
-  'w-full rounded-2xl border-2 border-fc-ink/20 bg-fc-white px-4 py-3.5 text-lg text-fc-ink placeholder:text-fc-ink-soft/70 transition-colors focus:border-fc-ink focus:outline-none';
+  'w-full rounded-sm border-2 border-fc-ink/20 bg-fc-white px-4 py-3 text-lg text-fc-ink placeholder:text-fc-ink-soft/70 transition-colors focus:border-fc-ink focus:outline-none';
 
 // Investor application. Until a form backend exists, submitting opens a prefilled email to head office.
 export function InvestForm() {
@@ -32,11 +32,11 @@ export function InvestForm() {
   }
 
   return (
-    <section id="apply" className="scroll-mt-20 bg-fc-white py-20 md:py-28">
-      <div className="mx-auto grid max-w-7xl gap-14 px-4 md:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+    <section id="apply" className="scroll-mt-20 py-20 md:py-24">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 md:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
-          <h2 className="m-0 font-fc-logo text-5xl leading-none tracking-[-0.01em] md:text-6xl">
-            Apply to <span className="text-fc-red italic">invest</span>
+          <h2 className="m-0 text-5xl leading-none md:text-6xl">
+            Apply to <span className="text-fc-red">invest</span>
           </h2>
           <p className="mt-6 mb-0 max-w-sm text-xl leading-snug text-fc-ink-soft">
             Tell us about yourself and where you would like to open. Head office reviews every application in the order it arrives.
@@ -91,9 +91,9 @@ export function InvestForm() {
             <textarea name="message" rows={4} className={`${field} resize-y`} />
           </Field>
 
-          <details className="rounded-2xl border-2 border-fc-ink/15 bg-fc-tile p-5 open:pb-6">
-            <summary className="cursor-pointer font-ns-victor text-base font-semibold">Read the terms and conditions</summary>
-            <ol className="mt-4 mb-0 grid gap-3 pl-5 text-base leading-relaxed text-fc-ink-soft">
+          <details className="rounded-sm border-2 border-fc-ink/15 bg-fc-paper p-4 open:pb-6">
+            <summary className="cursor-pointer text-base font-semibold">Read the terms and conditions</summary>
+            <ol className="mt-4 mb-0 grid gap-3 pl-4 text-base leading-relaxed text-fc-ink-soft">
               {terms.map((t) => (
                 <li key={t}>{t}</li>
               ))}
@@ -101,7 +101,7 @@ export function InvestForm() {
           </details>
 
           <label className="flex items-start gap-3 text-lg">
-            <input type="checkbox" name="terms" required className="mt-1.5 size-5 shrink-0 accent-fc-red" />
+            <input type="checkbox" name="terms" required className="mt-2 size-5 shrink-0 accent-fc-red" />
             <span>I accept the terms and conditions.</span>
           </label>
 
@@ -122,7 +122,7 @@ export function InvestForm() {
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="grid gap-2">
-      <span className="font-ns-victor text-sm font-semibold">{label}</span>
+      <span className="text-sm font-semibold">{label}</span>
       {children}
     </label>
   );
@@ -136,7 +136,7 @@ function Choice({ name, legend, options, onChange }: { name: string; legend: str
         {options.map((o) => (
           <label key={o} className="cursor-pointer">
             <input type="radio" name={name} value={o} required onChange={() => onChange?.(o)} className="peer sr-only" />
-            <span className="block rounded-full border-2 border-fc-ink/20 px-5 py-2.5 font-ns-victor text-sm font-semibold transition-colors peer-checked:border-fc-ink peer-checked:bg-fc-ink peer-checked:text-fc-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-fc-red hover:border-fc-ink">
+            <span className="block rounded-full border-2 border-fc-ink/20 px-4 py-2 text-sm font-semibold transition-colors peer-checked:border-fc-ink peer-checked:bg-fc-ink peer-checked:text-fc-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-fc-red hover:border-fc-ink">
               {o}
             </span>
           </label>

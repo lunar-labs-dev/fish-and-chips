@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-fc-ink text-fc-white">
       <div className="mx-auto max-w-7xl px-4 pt-20 pb-10 md:px-8">
-        <div className="grid gap-12 border-b border-fc-white/15 pb-14 md:grid-cols-[1fr_0.6fr] lg:grid-cols-[1fr_2fr_0.7fr]">
+        <div className="grid gap-12 border-b border-fc-white/15 pb-12 md:grid-cols-[1fr_0.6fr] lg:grid-cols-[1fr_2fr_0.7fr]">
           <div>
             <a href={url('/')} aria-label={`${brand.name}, home`} className="inline-block">
               <img src={url('/images/logo-360.webp')} alt="" width={360} height={243} loading="lazy" className="w-36" />
@@ -19,8 +19,8 @@ export function Footer() {
           <div className="grid gap-8 sm:grid-cols-3 md:order-last md:col-span-2 lg:order-none lg:col-span-1">
             {stores.map((s) => (
               <div key={s.id}>
-                <h2 className="m-0 font-fc-logo text-lg text-fc-lemon">{s.name}</h2>
-                <address className="mt-3 text-base leading-snug text-fc-white/75 not-italic">
+                <h2 className="m-0 text-lg text-fc-peach">{s.name}</h2>
+                <address className="mt-3 text-base leading-snug text-fc-white/75">
                   {s.address.map((line) => (
                     <span key={line} className="block">
                       {line}
@@ -28,7 +28,7 @@ export function Footer() {
                   ))}
                   <span className="block">{s.city}</span>
                 </address>
-                <a href={telHref(s.phone)} className="mt-3 inline-block font-ns-victor text-sm whitespace-nowrap hover:text-fc-lemon">
+                <a href={telHref(s.phone)} className="mt-3 inline-block font-mono text-sm whitespace-nowrap hover:text-fc-peach">
                   {s.phone}
                 </a>
               </div>
@@ -36,7 +36,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="m-0 font-fc-logo text-lg text-fc-lemon">Explore</h2>
+            <h2 className="m-0 text-lg text-fc-peach">Explore</h2>
             <ul className="mt-3 grid list-none gap-2 p-0">
               {navLinks.map((l) => (
                 <li key={l.href}>
@@ -78,7 +78,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Built by LUNARLABS, opens lunarlabs.tech in a new tab"
-            className="font-ns-victor text-xs tracking-[0.18em] text-fc-lemon uppercase hover:text-fc-white"
+            className="text-xs tracking-widest text-fc-peach uppercase hover:text-fc-white"
           >
             {builtByLunarLabs.label}
           </a>

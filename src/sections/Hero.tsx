@@ -1,55 +1,44 @@
-import SplitText from '../components/SplitText';
-import { HeroSticker } from '../components/HeroSticker';
 import { SpecialsDeck } from '../components/SpecialsDeck';
+import { Fisherman } from '../components/Fisherman';
 import { brand, press } from '../data/site';
 
 const maverick = press.find((p) => p.outlet === 'Daily Maverick')!;
 
-// Type led hero on white tiles: the headline builds letter by letter beside a deck of specials with the year stuck on its corner.
+// Front page hero on newsprint: one headline, one action, one quote, and the specials deck with the old boy fishing off it.
 export function Hero() {
   return (
-    <section id="top" className="bg-tiles relative overflow-hidden pt-28 pb-16 md:pt-36 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-28 lg:pb-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-8">
+    <section id="top" className="relative overflow-x-clip pt-24 pb-16 md:pt-24 lg:flex lg:min-h-svh lg:items-center lg:pb-20">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 md:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="relative z-10">
-          <h1 className="m-0 font-fc-logo text-[clamp(3.25rem,13vw,7.5rem)] leading-[0.92] tracking-[-0.01em] text-fc-ink">
-            <SplitText tag="span" text="Battered with" splitType="chars" trigger="load" textAlign="left" delay={35} duration={0.9} />{' '}
-            <SplitText
-              tag="span"
-              text="love."
-              splitType="chars"
-              trigger="load"
-              textAlign="left"
-              delay={70}
-              duration={0.9}
-              ease="back.out(2.2)"
-              from={{ opacity: 0, y: '0.6em', rotate: -14 }}
-              to={{ opacity: 1, y: 0, rotate: 0, delay: 0.55 }}
-              className="pr-[0.08em] pb-[0.06em] text-fc-red italic"
-            />
+          <p className="reveal kicker m-0">Johannesburg · Fried fresh since {brand.founded}</p>
+          <h1 className="rise mt-4 mb-0 max-w-[680px] bg-linear-to-r from-[#000000] to-[#666666] bg-clip-text pb-2 text-6xl text-transparent md:text-7xl">
+            <span style={{ '--i': 0 } as React.CSSProperties}>Battered with</span>
+            <br />
+            <span style={{ '--i': 1 } as React.CSSProperties} className="text-fc-red">
+              love.
+            </span>
           </h1>
 
-          <p className="reveal mt-7 mb-0 max-w-md text-xl leading-snug text-fc-ink-soft md:text-2xl" style={{ '--delay': '350ms' } as React.CSSProperties}>
-            Proper fish and chips, fried fresh by a family who grew up on them. Serving Jozi since {brand.founded}.
+          <p className="reveal mt-6 mb-0 max-w-[680px] text-xl text-fc-ink-soft" style={{ '--delay': '350ms' } as React.CSSProperties}>
+            Fresh hake and hand cut chips, fried to order by a family who grew up on them. Three shops across Joburg and the East Rand.
           </p>
 
-          <div className="reveal mt-9 flex flex-wrap gap-3" style={{ '--delay': '450ms' } as React.CSSProperties}>
-            <a href="#menu" className="btn-red">
-              See the menu
-            </a>
-            <a href="#stores" className="btn-ink">
-              Find a store
-            </a>
-          </div>
+          <a href="#stores" className="btn-red reveal mt-8" style={{ '--delay': '450ms' } as React.CSSProperties}>
+            Find your nearest shop
+          </a>
 
-          <figure className="reveal mt-12 mb-0 max-w-md border-l-4 border-fc-red pl-5" style={{ '--delay': '550ms' } as React.CSSProperties}>
-            <blockquote className="m-0 text-lg leading-snug italic">“{maverick.quote}”</blockquote>
-            <figcaption className="mt-2 font-ns-victor text-sm font-semibold">{maverick.outlet}</figcaption>
+          <figure className="reveal mt-12 mb-0 max-w-md" style={{ '--delay': '550ms' } as React.CSSProperties}>
+            <blockquote className="m-0 text-lg">
+              <span className="mr-1 text-3xl leading-none font-bold text-fc-red">“</span>
+              {maverick.quote}”
+            </blockquote>
+            <figcaption className="kicker mt-2 text-fc-ink-soft">{maverick.outlet}</figcaption>
           </figure>
         </div>
 
-        <div className="reveal relative mx-auto w-full max-w-xl lg:max-w-none" style={{ '--delay': '200ms' } as React.CSSProperties}>
+        <div className="reveal relative mx-auto mt-32 w-full max-w-md lg:mt-24 lg:max-w-[480px]" style={{ '--delay': '200ms' } as React.CSSProperties}>
           <SpecialsDeck />
-          <HeroSticker year={brand.founded} />
+          <Fisherman className="pointer-events-none absolute -top-[120px] -left-[4%] z-20 w-40 md:-top-[150px] md:w-[200px]" />
         </div>
       </div>
     </section>

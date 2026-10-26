@@ -8,14 +8,14 @@ const bottomQuotes = press.filter((q) => !sidebar.includes(q.outlet));
 // Press coverage printed as an old broadsheet: ears, rules, a stuck on photo, justified columns and classifieds.
 export function Press() {
   return (
-    <section id="press" className="scroll-mt-20 overflow-hidden bg-fc-tile py-20 md:py-28">
+    <section id="press" className="scroll-mt-20 overflow-hidden py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-3 md:px-8">
         <div className="reveal relative isolate">
-          <div aria-hidden="true" className="paper-aged absolute inset-0 -z-10 translate-y-2 rotate-[1.2deg] shadow-[0_20px_40px_-24px_rgb(35_31_32/0.4)]" />
-          <article className="paper-aged relative px-4 py-6 text-fc-ink shadow-[0_30px_60px_-30px_rgb(35_31_32/0.45),0_2px_6px_rgb(35_31_32/0.12)] md:px-12 md:py-12">
-            <header className="grid grid-cols-2 items-center gap-3 border-t border-fc-ink pt-5 pb-5 md:gap-6 lg:grid-cols-[11rem_1fr_11rem] lg:pt-7 lg:pb-7">
+          <div aria-hidden="true" className="wax absolute inset-0 -z-10 translate-y-2 rotate-[1.2deg] shadow-[0_20px_40px_-24px_rgb(35_31_32/0.4)]" />
+          <article className="wax relative px-4 py-6 text-fc-ink shadow-[0_30px_60px_-30px_rgb(35_31_32/0.45),0_2px_6px_rgb(35_31_32/0.12)] md:px-12 md:py-12">
+            <header className="grid grid-cols-2 items-center gap-3 border-t border-fc-ink pt-4 pb-4 md:gap-6 lg:grid-cols-[11rem_1fr_11rem] lg:pt-8 lg:pb-8">
               <Ear label="Weather">Golden and crisp, with a light drizzle of vinegar.</Ear>
-              <h2 className="order-first col-span-2 m-0 text-center font-fc-logo text-[clamp(2.4rem,10vw,6.75rem)] leading-[0.95] tracking-[-0.01em] text-balance italic lg:order-none lg:col-span-1">
+              <h2 className="order-first col-span-2 m-0 text-center text-5xl md:text-8xl text-balance lg:order-none lg:col-span-1">
                 The Daily Catch
               </h2>
               <Ear label="Motto">
@@ -23,7 +23,7 @@ export function Press() {
               </Ear>
             </header>
 
-            <p className="m-0 flex flex-wrap justify-center gap-x-6 gap-y-1 border-y-[5px] border-double border-fc-ink py-2 text-center text-xs tracking-[0.2em] uppercase md:justify-between md:text-sm">
+            <p className="m-0 flex flex-wrap justify-center gap-x-6 gap-y-1 border-y-[5px] border-double border-fc-ink py-2 text-center text-xs font-mono tracking-widest uppercase md:justify-between md:text-sm">
               <span>Vol. VIII</span>
               <span>Johannesburg</span>
               <span>Est. {brand.founded}</span>
@@ -33,11 +33,11 @@ export function Press() {
             <div className="mt-8 grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-0 lg:divide-x lg:divide-fc-ink/40">
               <section className="lg:pr-10">
                 <a href={interview702.href} target="_blank" rel="noopener noreferrer" className="group block text-fc-ink no-underline">
-                  <h3 className="m-0 font-fc-logo text-[clamp(1.9rem,5vw,3.25rem)] leading-[0.95] tracking-[-0.01em] uppercase group-hover:text-fc-red">
+                  <h3 className="m-0 text-3xl md:text-5xl uppercase group-hover:text-fc-red">
                     {interview702.title}
                   </h3>
                 </a>
-                <p className="mt-3 mb-0 border-b border-fc-ink/40 pb-4 text-lg leading-snug italic md:text-xl">
+                <p className="mt-3 mb-0 border-b border-fc-ink/40 pb-4 text-lg leading-snug md:text-xl">
                   The family behind the counter goes live on air with Azania Mosaka.
                 </p>
                 <div className="mt-6 grid gap-6 md:grid-cols-[minmax(0,15rem)_1fr]">
@@ -54,16 +54,16 @@ export function Press() {
                       />
                       <span className="sr-only">, opens 702 in a new tab</span>
                     </a>
-                    <figcaption className="mt-3 text-sm leading-snug italic">Pictured: the team in the 702 studio.</figcaption>
+                    <figcaption className="mt-3 text-sm leading-snug">Pictured: the team in the 702 studio.</figcaption>
                   </figure>
                   <div className="text-lg leading-relaxed hyphens-auto md:text-justify">
-                    <p className="m-0 first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter:font-fc-logo first-letter:text-6xl first-letter:leading-[0.8]">
+                    <p className="m-0 first-letter:float-left first-letter:mt-1 first-letter:mr-2 first-letter: first-letter:text-6xl first-letter:font-bold first-letter:leading-none">
                       {interview702.description}
                     </p>
                     <p className="mt-4 mb-0">
                       They talked about two families, two shops on one Johannesburg street, and the smell of fish and chips that brought everyone back together.
                     </p>
-                    <a href={interview702.href} target="_blank" rel="noopener noreferrer" className="link-underline mt-4 inline-block font-ns-victor text-sm font-semibold">
+                    <a href={interview702.href} target="_blank" rel="noopener noreferrer" className="link-underline mt-4 inline-block text-sm font-semibold">
                       Listen to the interview<span className="sr-only">, opens 702 in a new tab</span>
                     </a>
                   </div>
@@ -86,17 +86,17 @@ export function Press() {
             </div>
 
             <section className="mt-8 border-4 border-double border-fc-ink p-4 md:p-6">
-              <h3 className="m-0 border-b border-fc-ink pb-2 text-center font-fc-logo text-xl tracking-[0.15em] uppercase">Classifieds</h3>
-              <div className="mt-4 grid gap-5 text-base leading-snug md:grid-cols-2 md:divide-x md:divide-fc-ink/40">
+              <h3 className="m-0 border-b border-fc-ink pb-2 text-center text-xl tracking-widest uppercase">Classifieds</h3>
+              <div className="mt-4 grid gap-4 text-base leading-snug md:grid-cols-2 md:divide-x md:divide-fc-ink/40">
                 <p className="m-0 md:pr-6 md:text-justify">
-                  <strong className="font-ns-victor uppercase">Wanted.</strong> Hungry people with a taste for proper hake and chips. Apply in person at any of our stores.{' '}
-                  <a href="#stores" className="link-underline font-ns-victor text-sm font-semibold">
+                  <strong className="uppercase">Wanted.</strong> Hungry people with a taste for proper hake and chips. Apply in person at any of our stores.{' '}
+                  <a href="#stores" className="link-underline text-sm font-semibold">
                     Find a store
                   </a>
                 </p>
                 <p className="m-0 md:pl-6 md:text-justify">
-                  <strong className="font-ns-victor uppercase">Opportunity.</strong> Bring the chippie to your corner. Franchise partners wanted across Gauteng and beyond.{' '}
-                  <a href={url('/invest/')} className="link-underline font-ns-victor text-sm font-semibold">
+                  <strong className="uppercase">Opportunity.</strong> Bring the chippie to your corner. Franchise partners wanted across Gauteng and beyond.{' '}
+                  <a href={url('/invest/')} className="link-underline text-sm font-semibold">
                     Invest with us
                   </a>
                 </p>
@@ -112,8 +112,8 @@ export function Press() {
 // A boxed "ear" beside the masthead, as on old front pages.
 function Ear({ label, children, className = '' }: { label: string; children: React.ReactNode; className?: string }) {
   return (
-    <p className={`m-0 border border-fc-ink p-2.5 text-center text-sm leading-snug italic md:p-3 ${className}`}>
-      <strong className="font-ns-victor not-italic">{label}:</strong> {children}
+    <p className={`m-0 border border-fc-ink p-2 text-center text-sm leading-snug md:p-3 ${className}`}>
+      <strong className="">{label}:</strong> {children}
     </p>
   );
 }
@@ -121,14 +121,14 @@ function Ear({ label, children, className = '' }: { label: string; children: Rea
 // One press quote set as a short newspaper clipping.
 function Clipping({ quote: q }: { quote: PressQuote }) {
   return (
-    <article className="py-5">
-      <h3 className="m-0 font-fc-logo text-base leading-tight tracking-[0.08em] uppercase">{q.outlet}</h3>
+    <article className="py-4">
+      <h3 className="m-0 text-base leading-tight tracking-wider uppercase">{q.outlet}</h3>
       <blockquote className="mt-3 mb-0 text-lg leading-snug hyphens-auto md:text-justify">“{q.quote}”</blockquote>
       {(q.year || q.href) && (
         <p className="mt-3 mb-0 flex flex-wrap items-baseline gap-x-3 text-sm">
-          {q.year && <span className="italic">Printed {q.year}</span>}
+          {q.year && <span className="">Printed {q.year}</span>}
           {q.href && (
-            <a href={q.href} target="_blank" rel="noopener noreferrer" className="link-underline font-ns-victor font-semibold">
+            <a href={q.href} target="_blank" rel="noopener noreferrer" className="link-underline font-semibold">
               Read the article<span className="sr-only"> on {q.outlet}, opens in a new tab</span>
             </a>
           )}
