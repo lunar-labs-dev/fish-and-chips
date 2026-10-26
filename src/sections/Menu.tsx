@@ -144,6 +144,9 @@ function MenuPanel({ category: c }: { category: MenuCategory }) {
 }
 
 function MenuRow({ item }: { item: MenuItem }) {
+  const hasDetail = item.options?.some((o) => o.detail) ?? false;
+  // Option rows share one set of columns (icon, size, weight, dots, price), so every row lines up.
+  const columns = [item.sizes && 'auto', 'auto', hasDetail && 'auto', 'minmax(1rem,1fr)', 'auto'].filter(Boolean).join(' ');
   return (
     <li className="border-b border-dashed border-fc-ink/20 py-5">
       <div className="flex items-baseline gap-3">
@@ -165,16 +168,16 @@ function MenuRow({ item }: { item: MenuItem }) {
       </div>
       {item.description && <p className="mt-1.5 mb-0 max-w-md text-lg leading-snug text-fc-ink-soft">{item.description}</p>}
       {item.options && (
-        <dl className={`mt-3 mb-0 grid max-w-sm ${item.sizes ? 'gap-2' : 'gap-1'}`}>
+        <dl className={`mt-3 mb-0 grid max-w-sm gap-x-3 ${item.sizes ? 'gap-y-2' : 'gap-y-1'}`} style={{ gridTemplateColumns: columns }}>
           {item.options.map((o, i, all) => (
-            <div key={o.label} className="flex items-baseline gap-3">
+            <div key={o.label} className="col-span-full grid grid-cols-subgrid items-baseline">
               {item.sizes && <SizeMark kind={item.sizes} step={i} of={all.length} />}
-              <dt className="text-lg">
-                {o.label}
-                {o.detail && <span className="ml-2 text-base text-fc-ink-soft">{o.detail}</span>}
+              <dt className={`text-lg ${hasDetail ? 'col-span-2 grid grid-cols-subgrid items-baseline' : ''}`}>
+                <span>{o.label}</span>
+                {o.detail && <span className="text-base text-fc-ink-soft">{o.detail}</span>}
               </dt>
-              <span className="flex-1 translate-y-[-0.3em] border-b-2 border-dotted border-fc-ink/20" aria-hidden="true" />
-              <dd className="m-0 font-ns-victor font-bold text-fc-red">{o.price}</dd>
+              <span className="translate-y-[-0.3em] border-b-2 border-dotted border-fc-ink/20" aria-hidden="true" />
+              <dd className="m-0 text-right font-ns-victor font-bold text-fc-red">{o.price}</dd>
             </div>
           ))}
         </dl>
@@ -184,20 +187,21 @@ function MenuRow({ item }: { item: MenuItem }) {
   );
 }
 
-// Sizes at a glance: the icon grows from half size on the smallest option to full size on the largest.
+// Sizes at a glance: the icon grows from half size on the smallest option to full size on the largest,
+// centred on its row. Each viewBox hugs its drawing, so the centre is the drawing's centre.
 function SizeMark({ kind, step, of }: { kind: SizeIcon; step: number; of: number }) {
   const width = `${(of > 1 ? 0.5 + (0.5 * step) / (of - 1) : 1) * 100}%`;
   return (
-    <span aria-hidden="true" className={`flex shrink-0 justify-center self-center ${kind === 'fish' ? 'h-6 w-12 items-center' : 'h-7 w-10 items-end'}`}>
+    <span aria-hidden="true" className={`flex h-6 items-center justify-center self-center ${kind === 'fish' ? 'w-12' : 'w-10'}`}>
       {kind === 'fish' ? (
-        <svg viewBox="0 0 48 24" style={{ width }} className="text-fc-ink">
+        <svg viewBox="2 2 42 19" style={{ width }} className="text-fc-ink">
           <path fill="currentColor" d="M2 12C8 3.5 23 2 33.5 9.5L44 3.5 40.5 12l3.5 8.5-10.5-6C23 22 8 20.5 2 12Z" />
           <path fill="currentColor" d="M17 5.2c2-2.6 6-3.6 9.5-2.7l-1.2 3.6c-2.6-.6-5.4-.9-8.3-.9Z" />
           <circle cx="9" cy="10.6" r="1.7" className="fill-fc-white" />
           <path d="M14 7.5c1.6 2.9 1.6 6.1 0 9" className="fill-none stroke-fc-white" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       ) : (
-        <svg viewBox="0 0 40 28" style={{ width }}>
+        <svg viewBox="3 9 34 19" style={{ width }}>
           <path d="M7 14c2.6-6.2 23.4-6.2 26 0Z" className="fill-fc-lemon" />
           <path d="M3 14h34c0 7-7 12-17 12S3 21 3 14Z" className="fill-fc-ink" />
           <rect x="14" y="25" width="12" height="3" rx="1.5" className="fill-fc-ink" />
