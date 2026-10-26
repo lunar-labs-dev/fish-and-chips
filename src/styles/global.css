@@ -1,0 +1,129 @@
+/* Self hosted variable fonts, upright and italic. */
+@import "@fontsource-variable/victor-mono";
+@import "@fontsource-variable/victor-mono/wght-italic.css";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/newsreader/wght-italic.css";
+@import "tailwindcss";
+
+/* Modern chippie: white tiles, newsprint, the logo's print black, vinegar red. */
+@theme {
+  --color-fc-white: #FFFFFF;
+  --color-fc-tile: #F6F5F3;
+  --color-fc-grout: #E7E3DE;
+  --color-fc-paper: #F6F2E8;
+  --color-fc-paper-rule: #D9D1BE;
+  --color-fc-ink: #231F20;
+  --color-fc-ink-soft: #57504D;
+  --color-fc-red: #C42F27;
+  --color-fc-red-deep: #A3241D;
+  --color-fc-lemon: #F4C443;
+
+  --font-ns-victor: 'Victor Mono Variable', 'Victor Mono', ui-monospace, monospace;
+  --font-fc-serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
+
+  --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background-color: var(--color-fc-white);
+  color: var(--color-fc-ink);
+  font-family: var(--font-fc-serif);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible {
+  outline: 3px solid var(--color-fc-red);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+::selection {
+  background: var(--color-fc-lemon);
+  color: var(--color-fc-ink);
+}
+
+/* White subway tiles laid in a running bond, like the shop counter. */
+.bg-tiles {
+  background-color: var(--color-fc-white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48'%3E%3Cg fill='none' stroke='%23E7E3DE' stroke-width='1.5'%3E%3Cpath d='M0 .75h96M0 24.75h96M.75 0v24M48.75 24v24'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 48px;
+}
+
+/* Aged newsprint: warm paper, SVG noise for fibre grain, darker yellowed edges. */
+.paper-aged {
+  background-color: #EEE5CF;
+  background-image:
+    radial-gradient(ellipse at center, transparent 55%, rgb(130 95 40 / 0.16) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.27 0 0 0 0 0.15 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-ns-victor text-sm font-semibold tracking-tight transition-[background-color,color,transform,box-shadow] duration-300 ease-fc-out active:scale-[0.97];
+}
+@utility btn-red {
+  @apply btn bg-fc-red text-fc-white shadow-[0_6px_0_var(--color-fc-red-deep)] hover:-translate-y-0.5 hover:shadow-[0_8px_0_var(--color-fc-red-deep)];
+}
+@utility btn-ink {
+  @apply btn border-2 border-fc-ink bg-fc-white text-fc-ink hover:bg-fc-ink hover:text-fc-white;
+}
+@utility link-underline {
+  @apply underline decoration-fc-red decoration-2 underline-offset-4 transition-colors hover:text-fc-red;
+}
+
+/* Scroll reveal: JS adds .js to <html>, so content stays visible without scripts. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease-fc-out), transform 0.9s var(--ease-fc-out);
+  transition-delay: var(--delay, 0ms);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* React Bits SplitText hides its text until GSAP has split it. */
+.js .split-pending {
+  visibility: hidden;
+}
+
+/* Hero headline words rise in one after another. */
+.js .rise > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.6em) rotate(2deg);
+  animation: rise 1s var(--ease-fc-out) forwards;
+  animation-delay: calc(var(--i) * 90ms + 150ms);
+}
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Endless outlet ticker in the press strip. */
+.ticker {
+  animation: ticker 40s linear infinite;
+}
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .rise > span {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: opacity 0.4s linear;
+  }
+  .ticker {
+    animation: none;
+  }
+}
