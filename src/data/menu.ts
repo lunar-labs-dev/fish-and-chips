@@ -1,6 +1,9 @@
 // The full menu, transcribed from the client's December 2025 PDF (Website-Mobile-Menu-V2.pdf).
 
-export type MenuOption = { label: string; price: string };
+export type MenuOption = { label: string; detail?: string; price: string };
+
+/** Fish for fish portions, a bowl for anything else that comes in sizes. */
+export type SizeIcon = 'fish' | 'bowl';
 
 export type MenuItem = {
   name: string;
@@ -8,6 +11,8 @@ export type MenuItem = {
   /** Shown beside the name. Omitted when the item lists sized options instead. */
   price?: string;
   options?: MenuOption[];
+  /** Marks the options as sizes, smallest first, each drawn with this icon growing a step. */
+  sizes?: SizeIcon;
   note?: string;
   greenvalleyOnly?: boolean;
 };
@@ -35,6 +40,8 @@ export const menuCategories: MenuCategory[] = [
         name: 'Hake',
         description:
           'Responsibly sourced fresh hake, filleted and deep fried or grilled in our homemade recipe. Just add a squeeze of lemon and a side of our signature tartare sauce.',
+        // TODO(client): the fish weight for each size, to show as each option's detail.
+        sizes: 'fish',
         options: [
           { label: 'Regular', price: 'R65' },
           { label: 'Medium', price: 'R95' },
@@ -72,6 +79,7 @@ export const menuCategories: MenuCategory[] = [
       {
         name: 'Hake and chips parcel',
         description: 'Hake of choice served with regular 600g chips and tartare sauce.',
+        sizes: 'fish',
         options: [
           { label: 'Regular', price: 'R125' },
           { label: 'Medium', price: 'R149' },
@@ -114,11 +122,17 @@ export const menuCategories: MenuCategory[] = [
     tagline: 'Freshly hand cut and prepared unpeeled',
     intro: 'Slap or crispy, served with salt, vinegar and spice.',
     items: [
-      { name: 'Snacker (250g)', price: 'R29' },
-      { name: 'Small (310g)', price: 'R36' },
-      { name: 'Regular (600g)', price: 'R49' },
-      { name: 'Medium (1.2kg)', price: 'R92' },
-      { name: 'Large (2kg)', price: 'R149' },
+      {
+        name: 'Hand cut chips',
+        sizes: 'bowl',
+        options: [
+          { label: 'Snacker', detail: '250g', price: 'R29' },
+          { label: 'Small', detail: '310g', price: 'R36' },
+          { label: 'Regular', detail: '600g', price: 'R49' },
+          { label: 'Medium', detail: '1.2kg', price: 'R92' },
+          { label: 'Large', detail: '2kg', price: 'R149' },
+        ],
+      },
       // TODO(client): the PDF reads "From R50c". Confirm whether that is 50c or R5.
       { name: 'Chip sauces', description: 'Tomato, mustard, 1000 Island or peri mayo.', price: 'From 50c' },
     ],

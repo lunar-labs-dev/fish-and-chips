@@ -12,6 +12,8 @@ export type Special = {
   blurb: string;
   /** The price sticker: a big value with an optional small word under it. */
   price: { value: string; label?: string };
+  /** Small print under the blurb. */
+  terms?: string;
   art: SpecialArt;
 };
 
@@ -40,6 +42,7 @@ export const specials: Special[] = [
     // TODO(client): confirm the voucher terms (how long a slip stays valid, which stores, any exclusions).
     name: 'Bring back your till slip',
     blurb: 'Keep today’s slip and get 10% off your next order.',
+    terms: 'Ts&Cs apply.',
     price: { value: '10%', label: 'off' },
     art: 'till-slip',
   },

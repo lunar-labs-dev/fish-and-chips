@@ -5,7 +5,7 @@ import { brand, press } from '../data/site';
 
 const maverick = press.find((p) => p.outlet === 'Daily Maverick')!;
 
-// Type led hero on white tiles: the headline builds letter by letter beside a deck of specials, under a peelable year sticker.
+// Type led hero on white tiles: the headline builds letter by letter beside a deck of specials with the year stuck on its corner.
 export function Hero() {
   return (
     <section id="top" className="bg-tiles relative overflow-hidden pt-28 pb-16 md:pt-36 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-28 lg:pb-20">

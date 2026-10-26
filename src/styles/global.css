@@ -23,14 +23,6 @@
 
   --ease-fc-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Hero specials: the bar fills over each card's turn, and the deck deals the next card when it is full. */
-  --animate-deck-timer: deck-timer 6s linear both;
-  @keyframes deck-timer {
-    from {
-      transform: scaleX(0);
-    }
-  }
-
   /* Home page splash: a fish leaps from layered waves in slow motion and dives back in, the name settles, then the overlay fades. */
   /* The jump easing keeps horizontal speed constant along the arc, like a real leap; 4s is when the hero takes over. */
   --animate-fish-jump: fish-jump 2.4s cubic-bezier(0.42, 0.74, 0.58, 0.26) 0.5s both, fish-stretch 2.4s linear 0.5s both;

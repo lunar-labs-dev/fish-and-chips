@@ -20,6 +20,7 @@ const BURIED = { x: '0%', y: '-6%', rotate: 0, scale: 0.86, opacity: 0 };
 const FLICK = { x: '-70%', y: '10%', rotate: -14 };
 const FLICK_OUT = 0.44; // seconds until a flicked card is out of sight
 const FLICK_TOTAL = 1.1;
+const TURN = 6000; // ms each special stays up front while the deck deals itself
 
 function cardTarget(pos: number, n: number, dir: Dir | 0): TargetAndTransition {
   const slot = SLOTS[pos] ?? BURIED;
@@ -37,7 +38,7 @@ function cardTarget(pos: number, n: number, dir: Dir | 0): TargetAndTransition {
 }
 
 // The hero's specials as a deck of cards. It deals itself after the splash, pauses on hover, keyboard focus, a drag or
-// when scrolled away, swipes on touch, and stays put for reduced motion until the play button says otherwise.
+// when scrolled away, and stops for good once the visitor steps or swipes it. Reduced motion keeps it still.
 export function SpecialsDeck() {
   const n = specials.length;
   const [{ active, dir }, setDeck] = useState<{ active: number; dir: Dir | 0 }>({ active: 0, dir: 0 });
@@ -45,13 +46,15 @@ export function SpecialsDeck() {
   // (and a card pulled from the back goes the opposite way). Motion can't delay zIndex, so it lives here.
   const [stacked, setStacked] = useState(0);
   const [pauses, setPauses] = useState<ReadonlySet<Pause>>(() => new Set(['splash']));
-  const [choice, setChoice] = useState<boolean | null>(null); // the play button's say; null follows reduced motion
-  const [reduced, setReduced] = useState(false);
+  const [stopped, setStopped] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
-  const autoplay = choice ?? !reduced;
-  const playing = autoplay && pauses.size === 0;
+  const playing = !stopped && pauses.size === 0;
   const step = (d: Dir) => setDeck((s) => ({ active: (s.active + d + n) % n, dir: d }));
+  const take = (d: Dir) => {
+    setStopped(true);
+    step(d);
+  };
   const pause = (why: Pause, on: boolean) =>
     setPauses((p) => {
       if (p.has(why) === on) return p;
@@ -62,8 +65,6 @@ export function SpecialsDeck() {
     });
 
   useEffect(() => {
-    // Read after hydration, so the server and first client render agree on the play button.
-    setReduced(matchMedia('(prefers-reduced-motion: reduce)').matches);
     let live = true;
     splashDone.then(() => live && pause('splash', false));
     const io = new IntersectionObserver(([e]) => pause('offscreen', !e.isIntersecting), { threshold: 0.35 });
@@ -78,6 +79,12 @@ export function SpecialsDeck() {
     const t = setTimeout(() => setStacked(active), FLICK_OUT * 1000);
     return () => clearTimeout(t);
   }, [active]);
+
+  useEffect(() => {
+    if (!playing || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = setTimeout(() => step(1), TURN);
+    return () => clearTimeout(t);
+  }, [playing, active]);
 
   return (
     <div
@@ -99,36 +106,23 @@ export function SpecialsDeck() {
             pos={(i - active + n) % n}
             zIndex={n - ((i - stacked + n) % n)}
             dir={dir}
-            onStep={step}
+            onStep={take}
             onDrag={(on) => pause('drag', on)}
           />
         ))}
       </div>
 
       <div className="mt-7 flex items-center gap-3 md:mt-9">
-        <RoundButton label="Previous special" onClick={() => step(-1)}>
+        <RoundButton label="Previous special" onClick={() => take(-1)}>
           <path d="M15 5l-7 7 7 7" />
         </RoundButton>
-        <RoundButton label="Next special" onClick={() => step(1)}>
+        <RoundButton label="Next special" onClick={() => take(1)}>
           <path d="M9 5l7 7-7 7" />
         </RoundButton>
         <p aria-hidden="true" className="m-0 ml-1 font-ns-victor text-sm tabular-nums">
           <span className="font-bold">{String(active + 1).padStart(2, '0')}</span>
           <span className="text-fc-ink-soft"> / {String(n).padStart(2, '0')}</span>
         </p>
-        <span className="relative h-0.5 min-w-8 flex-1 overflow-hidden rounded-full bg-fc-grout">
-          {autoplay && (
-            <span
-              key={active}
-              onAnimationEnd={() => step(1)}
-              className="absolute inset-0 origin-left animate-deck-timer bg-fc-ink"
-              style={{ animationPlayState: playing ? 'running' : 'paused' }}
-            />
-          )}
-        </span>
-        <RoundButton label={autoplay ? 'Pause the specials' : 'Play the specials'} onClick={() => setChoice(!autoplay)}>
-          {autoplay ? <path d="M9 6v12M15 6v12" /> : <path d="M8 5.5v13l11-6.5Z" className="fill-current" />}
-        </RoundButton>
       </div>
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {playing ? '' : `${specials[active].name}, ${active + 1} of ${n}`}
@@ -178,7 +172,7 @@ function DeckCard({ special, index, pos, zIndex, dir, onStep, onDrag }: CardProp
             onStep(1);
           } else if (swipe > 80) onStep(-1);
         }}
-        className={`relative size-full overflow-hidden rounded-[2rem] border-[10px] border-fc-white bg-fc-white shadow-[0_40px_80px_-30px_rgb(35_31_32/0.45)] ${
+        className={`relative size-full overflow-hidden rounded-[2rem] border-[10px] border-fc-white bg-fc-white shadow-[0_40px_80px_-30px_rgb(35_31_32/0.45)] @container ${
           front ? 'cursor-grab active:cursor-grabbing' : ''
         }`}
       >
@@ -188,14 +182,15 @@ function DeckCard({ special, index, pos, zIndex, dir, onStep, onDrag }: CardProp
   );
 }
 
+// Sized by the card's own width (a container), since the card is narrowest on small laptops, not phones.
 function CardFace({ special: s, first }: { special: Special; first: boolean }) {
   const art = s.art;
   const slip = art === 'till-slip';
   return (
     <>
       {slip ? (
-        <div className="grid size-full place-items-center bg-fc-lemon pb-[28%] pl-[8%] @container">
-          <TillSlip className="-rotate-6 text-[1.95cqw] sm:text-[2.1cqw]" />
+        <div className="grid size-full place-items-center bg-fc-lemon pb-[44%] text-[1.6cqw] @lg:pb-[28%] @lg:pl-[8%] @lg:text-[1.95cqw]">
+          <TillSlip className="-rotate-6" />
         </div>
       ) : (
         <img
@@ -213,15 +208,16 @@ function CardFace({ special: s, first }: { special: Special; first: boolean }) {
         />
       )}
       <div
-        className={`absolute inset-x-0 bottom-0 px-5 pb-5 sm:px-6 sm:pb-6 md:px-8 md:pb-7 ${
+        className={`absolute inset-x-0 bottom-0 px-5 pb-5 @sm:px-6 @sm:pb-6 @lg:px-8 @lg:pb-7 ${
           slip ? 'text-fc-ink' : 'bg-linear-to-t from-fc-ink/90 via-fc-ink/45 to-transparent pt-28 text-fc-white'
         }`}
       >
-        <p className="m-0 font-ns-victor text-xl leading-tight font-bold tracking-tight sm:text-2xl md:text-[2rem]">{s.name}</p>
-        <p className="mt-1.5 mb-0 max-w-sm text-base leading-snug opacity-85 sm:text-lg">{s.blurb}</p>
+        <p className="m-0 font-ns-victor text-xl leading-tight font-bold tracking-tight @sm:text-2xl @lg:text-[2rem]">{s.name}</p>
+        <p className="mt-1.5 mb-0 max-w-sm text-base leading-snug opacity-85 @sm:text-lg">{s.blurb}</p>
+        {s.terms && <p className="mt-1 mb-0 text-sm opacity-70">{s.terms}</p>}
       </div>
-      <p className="absolute top-5 right-5 m-0 grid size-20 rotate-[8deg] place-content-center rounded-full border-4 border-fc-white bg-fc-red text-center font-ns-victor leading-none text-fc-white shadow-lg md:size-24">
-        <span className="text-2xl font-bold md:text-3xl">{s.price.value}</span>
+      <p className="absolute top-5 right-5 m-0 grid size-20 rotate-[8deg] place-content-center rounded-full border-4 border-fc-white bg-fc-red text-center font-ns-victor leading-none text-fc-white shadow-lg @lg:size-24">
+        <span className="text-2xl font-bold @lg:text-3xl">{s.price.value}</span>
         {s.price.label && <span className="mt-1 text-sm italic">{s.price.label}</span>}
       </p>
     </>
