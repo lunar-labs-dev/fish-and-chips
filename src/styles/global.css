@@ -19,119 +19,39 @@
 
   --ease-fc-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Home page splash: a fish leaps from layered waves in slow motion and dives back in, the name settles, then the overlay fades. */
-  /* The jump easing keeps horizontal speed constant along the arc, like a real leap; 4s is when the hero takes over. */
-  --animate-fish-jump: fish-jump 2.4s cubic-bezier(0.42, 0.74, 0.58, 0.26) 0.5s both, fish-stretch 2.4s linear 0.5s both;
-  --animate-tail: tail 0.36s ease-in-out infinite alternate;
-  --animate-wave: wave 5s linear infinite;
-  --animate-wave-mid: wave 7s linear infinite reverse;
-  --animate-wave-back: wave 10s linear infinite;
-  --animate-crown: crown 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  --animate-ripple: ripple 1.6s cubic-bezier(0.2, 0.6, 0.3, 1) both;
-  --animate-bubble: bubble 1.4s cubic-bezier(0.3, 0.6, 0.4, 1) both;
-  --animate-drop-x: drop-x 1.4s linear both;
-  --animate-drop-y: drop-y 1.4s both;
-  --animate-word-in: word-in 0.8s var(--ease-fc-out) both;
+  /* The sea at the foot of the screen: waves drift, the boat rocks, bubbles rise through the footer. */
+  --animate-wave: wave 9s linear infinite;
+  --animate-wave-back: wave 14s linear infinite reverse;
+  --animate-rock: rock 5s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  --animate-bubble: bubble 6s var(--ease-fc-out) infinite;
   --animate-bob: bob 3.2s var(--ease-fc-out) infinite alternate;
   --animate-sway: sway 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
   --animate-smoke: smoke 2.8s var(--ease-fc-out) infinite both;
-  --animate-rule-in: rule-in 0.9s var(--ease-fc-out) both;
-  --animate-scene-out: scene-out 0.6s ease-in-out 4s both;
-  --animate-splash-out: splash-out 0.6s ease-in-out 4s forwards;
 
-  @keyframes fish-jump {
-    from {
-      offset-distance: 0%;
-    }
-    to {
-      offset-distance: 100%;
-    }
-  }
-  @keyframes fish-stretch {
-    0% {
-      transform: scale(1.12, 0.9);
-    }
-    30%,
-    70% {
-      transform: scale(1, 1);
-    }
-    100% {
-      transform: scale(1.1, 0.92);
-    }
-  }
-  @keyframes tail {
-    from {
-      transform: rotate(-16deg);
-    }
-    to {
-      transform: rotate(16deg);
-    }
-  }
   @keyframes wave {
     to {
-      transform: translateX(-480px);
+      transform: translateX(-240px);
     }
   }
-  @keyframes crown {
-    0% {
-      transform: scale(0.4, 0);
-    }
-    35% {
-      transform: scale(1, 1);
-    }
-    100% {
-      transform: scale(1.2, 0);
-    }
-  }
-  @keyframes ripple {
+  @keyframes rock {
     from {
-      transform: scale(0.2);
-      opacity: 0.9;
+      transform: translateY(0) rotate(-1.5deg);
     }
     to {
-      transform: scale(1);
-      opacity: 0;
+      transform: translateY(3px) rotate(1.5deg);
     }
   }
   @keyframes bubble {
     from {
-      transform: translateY(0) scale(0.6);
+      transform: translateY(0);
       opacity: 0;
     }
-    25% {
-      opacity: 0.9;
+    20% {
+      opacity: 0.6;
     }
     to {
-      transform: translateY(-28px) scale(1);
+      transform: translateY(-160px);
       opacity: 0;
-    }
-  }
-  /* Droplets: x drifts linearly while y rises with ease out and falls with ease in, so each one traces a parabola. */
-  @keyframes drop-x {
-    0% {
-      transform: translateX(0);
-      opacity: 0;
-    }
-    10%,
-    80% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(var(--dx));
-      opacity: 0;
-    }
-  }
-  @keyframes drop-y {
-    0% {
-      transform: translateY(0) scale(0.5);
-      animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
-    }
-    45% {
-      transform: translateY(var(--dy)) scale(1);
-      animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
-    }
-    100% {
-      transform: translateY(26px) scale(0.8);
     }
   }
   /* The fisherman's float bobs on the water and his rod tip sways with it. */
@@ -156,28 +76,6 @@
     to {
       opacity: 0;
       transform: translateY(-10px);
-    }
-  }
-  @keyframes word-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-  }
-  @keyframes rule-in {
-    from {
-      transform: scaleX(0);
-    }
-  }
-  @keyframes scene-out {
-    to {
-      transform: translateY(-14px);
-    }
-  }
-  @keyframes splash-out {
-    to {
-      opacity: 0;
-      visibility: hidden;
     }
   }
 }
@@ -231,6 +129,11 @@ h4 {
   border: 1px solid rgb(7 7 7 / 0.14);
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 16px 32px -24px rgb(7 7 7 / 0.35);
   backdrop-filter: blur(2px);
+}
+
+/* Underwater: faint rippled light playing across the dark water. */
+@utility caustics {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.012 0.02' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -2.2 0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
 /* Small caps kicker over a headline, as on a front page. */
@@ -299,7 +202,11 @@ h4 {
   .ticker,
   .animate-bob,
   .animate-sway,
-  .animate-smoke {
+  .animate-smoke,
+  .animate-wave,
+  .animate-wave-back,
+  .animate-rock,
+  .animate-bubble {
     animation: none;
   }
 }

@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { m, useMotionValue, type TargetAndTransition } from 'motion/react';
 import { specials, type Special } from '../data/specials';
-import { splashDone } from '../lib/splash';
 import { url } from '../lib/url';
 import { TillSlip } from './TillSlip';
 
 type Dir = 1 | -1;
-type Pause = 'splash' | 'hover' | 'focus' | 'drag' | 'offscreen';
+type Pause = 'hover' | 'focus' | 'drag' | 'offscreen';
 
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 // Resting places: the front card, then two peeking out behind it. Any further cards wait unseen at the back.
@@ -37,7 +36,7 @@ function cardTarget(pos: number, n: number, dir: Dir | 0): TargetAndTransition {
   };
 }
 
-// The hero's specials as a deck of cards. It deals itself after the splash, pauses on hover, keyboard focus, a drag or
+// The hero's specials as a deck of cards. It deals itself, pauses on hover, keyboard focus, a drag or
 // when scrolled away, and stops for good once the visitor steps or swipes it. Reduced motion keeps it still.
 export function SpecialsDeck() {
   const n = specials.length;
@@ -45,7 +44,7 @@ export function SpecialsDeck() {
   // Stacking follows the deal once the flicked card is out of sight, so it leaves over the deck and comes back under it
   // (and a card pulled from the back goes the opposite way). Motion can't delay zIndex, so it lives here.
   const [stacked, setStacked] = useState(0);
-  const [pauses, setPauses] = useState<ReadonlySet<Pause>>(() => new Set(['splash']));
+  const [pauses, setPauses] = useState<ReadonlySet<Pause>>(() => new Set());
   const [stopped, setStopped] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
@@ -65,12 +64,9 @@ export function SpecialsDeck() {
     });
 
   useEffect(() => {
-    let live = true;
-    splashDone.then(() => live && pause('splash', false));
     const io = new IntersectionObserver(([e]) => pause('offscreen', !e.isIntersecting), { threshold: 0.35 });
     if (root.current) io.observe(root.current);
     return () => {
-      live = false;
       io.disconnect();
     };
   }, []);

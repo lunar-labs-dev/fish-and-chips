@@ -1,10 +1,9 @@
 import { SpecialsDeck } from '../components/SpecialsDeck';
-import { Fisherman } from '../components/Fisherman';
 import { brand, press } from '../data/site';
 
 const maverick = press.find((p) => p.outlet === 'Daily Maverick')!;
 
-// Front page hero on newsprint: one headline, one action, one quote, and the specials deck with the old boy fishing off it.
+// Front page hero on newsprint: one headline, one action, one quote, and the specials deck.
 export function Hero() {
   return (
     <section id="top" className="relative overflow-x-clip pt-24 pb-16 md:pt-24 lg:flex lg:min-h-svh lg:items-center lg:pb-20">
@@ -36,9 +35,8 @@ export function Hero() {
           </figure>
         </div>
 
-        <div className="reveal relative mx-auto mt-32 w-full max-w-md lg:mt-24 lg:max-w-[480px]" style={{ '--delay': '200ms' } as React.CSSProperties}>
+        <div className="reveal relative mx-auto w-full max-w-md lg:max-w-[480px]" style={{ '--delay': '200ms' } as React.CSSProperties}>
           <SpecialsDeck />
-          <Fisherman className="pointer-events-none absolute -top-[120px] -left-[4%] z-20 w-40 md:-top-[150px] md:w-[200px]" />
         </div>
       </div>
     </section>
