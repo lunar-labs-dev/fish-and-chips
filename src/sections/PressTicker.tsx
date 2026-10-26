@@ -1,8 +1,11 @@
+import { Fragment } from 'react';
 import { press } from '../data/site';
 
 const outlets = [...press.map((p) => p.outlet), '702'];
+// Two identical halves of 3 runs each (one run is about 1,900px), so the loop stays seamless on screens up to about 5,700px wide.
+const RUNS = 6;
 
-// Navy strip of press outlet names scrolling like a news ticker.
+// Ink strip of press outlet names scrolling like a news ticker.
 export function PressTicker() {
   const row = (hidden: boolean) => (
     <ul className="m-0 flex shrink-0 list-none items-center gap-10 p-0 pr-10" aria-hidden={hidden || undefined}>
@@ -18,8 +21,9 @@ export function PressTicker() {
   return (
     <section aria-label="As written about in" className="overflow-hidden bg-fc-ink py-5 text-fc-white">
       <div className="ticker flex w-max">
-        {row(false)}
-        {row(true)}
+        {Array.from({ length: RUNS }, (_, i) => (
+          <Fragment key={i}>{row(i > 0)}</Fragment>
+        ))}
       </div>
     </section>
   );

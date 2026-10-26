@@ -105,9 +105,9 @@ body {
   }
 }
 
-/* Endless outlet ticker in the press strip. */
+/* Endless outlet ticker in the press strip; 120s keeps the old speed across 3 runs per half. */
 .ticker {
-  animation: ticker 40s linear infinite;
+  animation: ticker 120s linear infinite;
 }
 @keyframes ticker {
   to {
